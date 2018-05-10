@@ -1,0 +1,8 @@
+{
+  "runtime":{
+    "majorVersion":"8"
+  },
+  "command": "npm start",
+  "release": {},
+  "notes": "Admin app"
+}
