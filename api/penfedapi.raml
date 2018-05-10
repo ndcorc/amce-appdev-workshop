@@ -1,0 +1,104 @@
+#%RAML 0.8
+title: PenFedAPI
+version: 1.0
+baseUri: /mobile/custom/PenFedAPI
+protocols: [HTTPS]
+/loans:
+  displayName: Loans
+  get:
+    displayName: Loans
+    description: |
+      Get all loans
+      
+    protocols: [HTTPS]
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              [
+                  {
+                      "Loan ID": 123,
+                      "Loan Value": "25000.00",
+                      "Dealership": "Ted Britt Ford",
+                      "Dealer Contact": "Paul Miller",
+                      "Status": "Current",
+                      "Last Notification": "Feb 15, 2018 5:10 PM"
+                  },
+                  {
+                      "Loan ID": 456,
+                      "Loan Value": "10500.00",
+                      "Dealership": "Koons Tysons Chevy",
+                      "Dealer Contact": "Earl Tydings",
+                      "Status": "Completed",
+                      "Last Notification": "Feb 15, 2018 1:10 PM"
+                  },
+                  {
+                      "Loan ID": 789,
+                      "Loan Value": "40250.00",
+                      "Dealership": "Ourisman Fairfax Toyota",
+                      "Dealer Contact": "Roger Stone",
+                      "Status": "Completed",
+                      "Last Notification": "Feb 15, 2018 10:00 AM"
+                  },
+                  {
+                      "Loan ID": 800,
+                      "Loan Value": "8750.00",
+                      "Dealership": "Jim McKay Chevrolet",
+                      "Dealer Contact": "Terry McManus",
+                      "Status": "Completed",
+                      "Last Notification": "Feb 8, 2018 6:00 PM"
+                  },
+                  {
+                      "Loan ID": 900,
+                      "Loan Value": "33500.00",
+                      "Dealership": "Honda of Tysons Corner",
+                      "Dealer Contact": "Nolan Corcoran",
+                      "Status": "Current",
+                      "Last Notification": "Feb 15, 2018 6:00 PM"
+                  },
+                  {
+                      "Loan ID": 943,
+                      "Loan Value": "12300.00",
+                      "Dealership": "BMW of Fairfax",
+                      "Dealer Contact": "Arnie Jacobson",
+                      "Status": "Completed",
+                      "Last Notification": "Feb 1, 2018 2:00 PM"
+                  }
+              ]
+              
+  post:
+    displayName: Loan
+    description: |
+      Create a loan notification profile
+      
+    protocols: [HTTPS]
+    body:
+      multipart/form-data:
+        formParameters:
+          value:
+            displayName: Loan Value
+            type: string
+            example: |
+              $10,500.00
+              
+            required: true
+          dealership:
+            displayName: Dealership
+            type: string
+            example: |
+              Koons Tyson Chevy
+              
+            required: true
+          contact_name:
+            displayName: Dealer Name
+            type: string
+            example: |
+              Paul Miller
+              
+            required: true
+          contact_mobile:
+            displayName: Contact Mobile
+            type: string
+            example: |
+              703-555-3434
