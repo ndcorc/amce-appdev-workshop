@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Platform, RefreshControl } from "react-native";
 import {
   Container, Header, Title,Content, Button, Icon,
   Card, CardItem, Text, Body, Left, Right
@@ -20,6 +21,7 @@ export default class Dashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      refreshing: false,
       total: (() => {
         var total = 0;
         for (var i = 0; i < this.props.loans.length; i++) {
@@ -29,6 +31,17 @@ export default class Dashboard extends Component {
       })()
     };
   };
+
+  _onRefresh() {
+    this.setState({refreshing: true});
+    this.props.refresh();
+  }
+
+  componentDidUpdate = (prevProps, prevState) => {
+    if (prevProps.loans !== this.props.loans) {
+      this.setState({refreshing: false});
+    }
+  }
   
   render() {
     var colors = [];
@@ -41,7 +54,12 @@ export default class Dashboard extends Component {
     }
     return (
       <Container style={styles.container}>
-        <Content>
+        <Content refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh.bind(this)}
+          />
+        }>
           <Card style={styles.mb} transparent>
             <Grid>
               <Row size={1} style={styles.text}>

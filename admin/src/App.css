@@ -91,3 +91,8 @@ span.input-group-text {
   padding-left: 15px;
   padding-right: 15px;
 }
+
+.ui.table td.warning, .ui.table tr.warning.trWarning {
+  background-color: rgb(255, 243, 205) !important;
+  border-color: #ffeeba !important;
+}

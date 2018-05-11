@@ -10,9 +10,10 @@ const HEADERS = {
     }  
 }
 const KEYS = {
-    public: "BPI_fYXR2kLPKwi_eoYsdtNaiyzp-_dQnSjrTUkc2vn37rTQYPaQ17iuTGysAkzxj9NZhgtPp-nTdJ9FdDihZeE",
-    private: "lJ6AwW22dj4cGeCTOJ1SNvGpqvz8ZHJfA0nuYSkrAig",
-    google: "AIzaSyB9y4yQi3LJL6KiWTl9U2LksO_k4TvdxQE"
+    public: "BDtYpZsfQADeA3zY6lS8sy3LstcjzQj8WIWeoLOX9hNb9eXNO1D4ize_F_fFHRK562VVkqDqI9WwfZHzDE-e2vM",
+    private: "mPQR_Fvta98jmY_FKQV0anWtKiEInhu1Ydn1ArldtdY",
+    firebase: "BKxOtrfpFp4SgQ2Amtp3KRtcywMSaHlKHYRq5RxW7UAHXaspbApo-sjXm5kjIvNLfU37lYLqhWMjhrczGDX1EIo",
+    google: "AIzaSyC9jWOLMy90azFnovlz_XWNJu6MNfDtAjw"
 }
 
 export const config = { BASE_URL, HEADERS, KEYS };

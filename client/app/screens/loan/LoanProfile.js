@@ -28,7 +28,7 @@ class LoanProfile extends Component {
     this.props.loanListActions.fetchLoans();
   };
 
-  notify = () => {
+  createAlert = () => {
     let index = this.props.navigation.state.params.index;
     let loan = this.props.loans[index];
     let config = this.props.screenProps.config;
@@ -112,7 +112,7 @@ class LoanProfile extends Component {
             </CardItem>
             <CardItem cardBody
                       style={{alignItems: 'center', justifyContent: 'center'}}>
-                <TouchableHighlight onPress={() => this.notify()}>
+                <TouchableHighlight onPress={() => this.createAlert()}>
               <Image style={{
                        resizeMode: 'contain',
                        height: 155,

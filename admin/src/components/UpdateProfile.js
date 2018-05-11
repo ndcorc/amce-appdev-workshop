@@ -258,7 +258,7 @@ UpdateProfile.propTypes = {
   direction: PropTypes.string,
   unreadMsg: PropTypes.object,
   unread: PropTypes.bool,
-  profile: PropTypes.number,
+  profiles: PropTypes.array,
   success: PropTypes.bool,
   token: PropTypes.string
 };
@@ -270,7 +270,7 @@ function mapStateToProps(state) {
     column: state.loanList.column,
     direction: state.loanList.direction,
     unread: state.loanList.unreadMsg.unread,
-    profile: state.loanList.unreadMsg.profile,
+    profiles: state.loanList.unreadMsg.profiles,
     unreadMsg: state.loanList.unreadMsg,
     success: state.loanList.success,
     token: state.loanList.token

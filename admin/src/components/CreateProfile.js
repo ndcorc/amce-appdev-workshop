@@ -204,8 +204,7 @@ class CreateProfile extends Component {
                                          className="form-control"
                                          placeholder="Enter loan ID"
                                          value={this.state.cudlId}
-                                         onChange={this.updateId}
-                                        />
+                                         onChange={this.updateId} />
                       </InputGroup>
                     </Col>
                   </FormGroup>
@@ -215,8 +214,7 @@ class CreateProfile extends Component {
                       <Input type="name"
                              placeholder="e.g. Linda Sanchez"
                              value={this.state.loanee}
-                             onChange={this.updateLoanee}
-                            />
+                             onChange={this.updateLoanee} />
                     </Col>
                   </FormGroup>
                   <FormGroup row>
@@ -228,8 +226,7 @@ class CreateProfile extends Component {
                                          className="form-control"
                                          placeholder="Enter an amount"
                                          value={this.state.value}
-                                         onChange={this.updateValue}
-                                        />
+                                         onChange={this.updateValue} />
                       </InputGroup>
                     </Col>
                   </FormGroup>
@@ -239,8 +236,7 @@ class CreateProfile extends Component {
                       <Input type="name" 
                              placeholder="e.g. Koons Tyson Chevy"
                              value={this.state.dealership}
-                             onChange={this.updateDealership}
-                            />
+                             onChange={this.updateDealership} />
                     </Col>
                   </FormGroup>
                   <FormGroup row>
@@ -249,8 +245,7 @@ class CreateProfile extends Component {
                       <Input type="name"
                              placeholder="e.g. Paul Miller"
                              value={this.state.contact_name}
-                             onChange={this.updateName}
-                            />
+                             onChange={this.updateName} />
                     </Col>
                   </FormGroup>
                   <FormGroup row>
@@ -261,8 +256,7 @@ class CreateProfile extends Component {
                                        placeholder="(123) 456-7890"
                                        guide={false}
                                        value={this.state.contact_mobile}
-                                       onChange={this.updateMobile}
-                                      />
+                                       onChange={this.updateMobile} />
                     </Col>
                   </FormGroup>
                   <FormGroup>
@@ -302,7 +296,7 @@ CreateProfile.propTypes = {
   direction: PropTypes.string,
   unreadMsg: PropTypes.object,
   unread: PropTypes.bool,
-  profile: PropTypes.number,
+  profiles: PropTypes.array,
   success: PropTypes.bool,
   token: PropTypes.string
 };
@@ -314,7 +308,7 @@ function mapStateToProps(state) {
     column: state.loanList.column,
     direction: state.loanList.direction,
     unread: state.loanList.unreadMsg.unread,
-    profile: state.loanList.unreadMsg.profile,
+    profiles: state.loanList.unreadMsg.profiles,
     unreadMsg: state.loanList.unreadMsg,
     success: state.loanList.success,
     token: state.loanList.token

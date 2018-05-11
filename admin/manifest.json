@@ -4,5 +4,6 @@
   },
   "command": "npm start",
   "release": {},
-  "notes": "Admin app"
+  "notes": "Admin app",
+  "gcm_sender_id": "103953800507"
 }

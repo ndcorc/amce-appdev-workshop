@@ -22,7 +22,7 @@ export default function loanList(state = initialState.loanList, action) {
         direction: "ascending",
         unreadMsg: {
           unread: false,
-          profile: 1
+          profiles: []
         },
         success: false
       }

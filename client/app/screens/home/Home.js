@@ -22,6 +22,10 @@ class Home extends Component {
     this.props.loanListActions.fetchLoans();
   };
 
+  refresh = () => {
+    this.props.loanListActions.fetchLoans();
+  }
+
   renderData = () => {
     return (
       <Container style={{ backgroundColor: "#FBFAFA" }}>
@@ -52,8 +56,8 @@ class Home extends Component {
         </Segment>
 
         <Content padder>
-          {this.state.seg === 1 && <Dashboard loans={this.props.loans} navigate={this.props.navigation.navigate}/>}
-          {this.state.seg === 2 && <LoanList loans={this.props.loans} navigate={this.props.navigation.navigate}/>}
+          {this.state.seg === 1 && <Dashboard loans={this.props.loans} refresh={this.refresh} navigate={this.props.navigation.navigate}/>}
+          {this.state.seg === 2 && <LoanList loans={this.props.loans} refresh={this.refresh} navigate={this.props.navigation.navigate}/>}
         </Content>
       </Container>
     )

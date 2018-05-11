@@ -35,21 +35,19 @@ class LoanList extends Component {
     this.interval = setInterval(() => {
       if (typeof this.props.unreadMsg === 'undefined') { return }
       var unread = false;
-      var profile = 0;
-      console.log(this.props);
+      var profiles = [];
       var unreadMsg = this.props.unreadMsg;
       for (var i = 0; i < this.props.loans.length; i++) {
         var msgs = this.props.loans[i].messages;
         for (var j = 0; j < msgs.length; j++) {
           if (msgs[j].to === "PenFed Loan Processor" && msgs[j].unread === true) {
+            profiles.push(i);
             unread = true;
-            profile = i;
           }
         }
       }
       unreadMsg.unread = unread;
-      unreadMsg.profile = profile;
-      console.log(unread);
+      unreadMsg.profiles = profiles;
       this.props.loanListActions.updateUnread(unreadMsg);
     }, 1500);
     if (this.props.location.state && this.props.location.state.success) {
@@ -64,8 +62,8 @@ class LoanList extends Component {
   };
 
   componentWillUpdate(nextProps, nextState) {
-    console.log(this.props);
-    console.log(nextProps);
+    //console.log(this.props);
+    //console.log(nextProps);
   }
   
   deleteProfile(index) {
@@ -117,7 +115,8 @@ class LoanList extends Component {
         <Loan loan={this.props.loans[i]} 
               index={i} 
               deleteProfile={this.deleteProfile.bind(this)}
-              updateStatus={this.updateStatus}>
+              updateStatus={this.updateStatus}
+              unreadMsg={this.props.unreadMsg}>
         </Loan>
       );
     }
@@ -134,12 +133,10 @@ class LoanList extends Component {
   }
 
   renderData() {
-    console.log(this.props);
     const column = this.props.column;
     const direction = this.props.direction;
-    var cudlId = (typeof this.props.unreadMsg === 'undefined' || 
-    this.props.loans.length === 0) ? 
-    111 : this.props.loans[this.props.unreadMsg.profile].cudlId;
+    /*var cudlIds = (typeof this.props.unreadMsg === 'undefined' || this.props.loans.length === 0) ? 
+    111 : this.props.loans[this.props.unreadMsg.profile].cudlId;*/
     var unreadMsg = this.props.unreadMsg;
     return (
       <Container fluid="true">
@@ -147,7 +144,7 @@ class LoanList extends Component {
           unreadMsg.unread ? (
           <Alert color="warning" style={{padding: "25px"}}>
             <h3>
-              You have a new message waiting for Loan {cudlId}!
+              You have {unreadMsg.profiles.length} unread message{unreadMsg.profiles.length > 1 ? "s" : ""}!
             </h3>
           </Alert>) : null
         }
@@ -165,13 +162,16 @@ class LoanList extends Component {
                 </Alert>) : null
               }
               <CardTitle>
+                <Container>
                 <Row>
-                  <Col sm="12" md={{ size: '6', offset: 1}}>
+                  <Col sm="12">
                     <h1 style={{fontSize: "35px"}}>Dealer Notifier</h1>
                   </Col>
                 </Row>
+                </Container>
               </CardTitle>
               <CardLink>
+                <Container>
                 <Col>
                   <Link to='/create_profile'>
                     <Button outline color="primary" size="lg" className="float-right" style={{fontSize: "15px"}}>
@@ -179,33 +179,36 @@ class LoanList extends Component {
                     </Button>
                   </Link>
                 </Col>
+                </Container>
               </CardLink>
               <CardBody>
-                <Table container sortable striped selectable stackable collapsing style={{fontSize: "15px", width: "inherit"}}>
-                  <Table.Header>
-                    <Table.Row className="title">
-                      <Table.HeaderCell sorted={column === 'cudlId' ? direction : null} onClick={this.handleSort('cudlId')}>Loan ID</Table.HeaderCell>
-                      <Table.HeaderCell sorted={column === 'loanee' ? direction : null} onClick={this.handleSort('loanee')}>Loanee</Table.HeaderCell>
-                      <Table.HeaderCell sorted={column === 'value' ? direction : null} onClick={this.handleSort('value')}>Loan Value</Table.HeaderCell>
-                      <Table.HeaderCell sorted={column === 'dealership' ? direction : null} onClick={this.handleSort('dealership')}>Dealership</Table.HeaderCell>
-                      <Table.HeaderCell sorted={column === 'contact_name' ? direction : null} onClick={this.handleSort('contact_name')}>Dealer Contact</Table.HeaderCell>
-                      <Table.HeaderCell sorted={column === 'status' ? direction : null} onClick={this.handleSort('status')}>Status</Table.HeaderCell>
-                      <Table.HeaderCell sorted={column === 'lastNotification' ? direction : null} onClick={this.handleSort('lastNotification')}>Last Notification</Table.HeaderCell>
-                      <Table.HeaderCell>Actions</Table.HeaderCell>
-                    </Table.Row>
-                  </Table.Header>
-                  {this.getLoans()}
-                </Table>
+                <Container>
+                  <Table sortable striped selectable stackable collapsing style={{fontSize: "15px", width: "inherit"}}>
+                    <Table.Header>
+                      <Table.Row className="title">
+                        <Table.HeaderCell sorted={column === 'cudlId' ? direction : null} onClick={this.handleSort('cudlId')}>Loan ID</Table.HeaderCell>
+                        <Table.HeaderCell sorted={column === 'loanee' ? direction : null} onClick={this.handleSort('loanee')}>Loanee</Table.HeaderCell>
+                        <Table.HeaderCell sorted={column === 'value' ? direction : null} onClick={this.handleSort('value')}>Loan Value</Table.HeaderCell>
+                        <Table.HeaderCell sorted={column === 'dealership' ? direction : null} onClick={this.handleSort('dealership')}>Dealership</Table.HeaderCell>
+                        <Table.HeaderCell sorted={column === 'contact_name' ? direction : null} onClick={this.handleSort('contact_name')}>Dealer Contact</Table.HeaderCell>
+                        <Table.HeaderCell sorted={column === 'status' ? direction : null} onClick={this.handleSort('status')}>Status</Table.HeaderCell>
+                        <Table.HeaderCell sorted={column === 'lastNotification' ? direction : null} onClick={this.handleSort('lastNotification')}>Last Notification</Table.HeaderCell>
+                        <Table.HeaderCell>Actions</Table.HeaderCell>
+                      </Table.Row>
+                    </Table.Header>
+                    {this.getLoans()}
+                  </Table>
+                </Container>
               </CardBody>
             </Card>
           </Col>
         </Row>
+        <br/><br/>
       </Container>
     );
   }
 
   render() {
-    console.log(this.props);
     return (
       <div className=""> {
         this.props.unreadMsg !== {} ? 
@@ -225,19 +228,18 @@ LoanList.propTypes = {
   direction: PropTypes.string,
   unreadMsg: PropTypes.object,
   unread: PropTypes.bool,
-  profile: PropTypes.number,
+  profiles: PropTypes.array,
   success: PropTypes.bool,
   token: PropTypes.string
 };
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     loans: state.loanList.loans,
     column: state.loanList.column,
     direction: state.loanList.direction,
     unread: state.loanList.unreadMsg.unread,
-    profile: state.loanList.unreadMsg.profile,
+    profiles: state.loanList.unreadMsg.profiles,
     unreadMsg: state.loanList.unreadMsg,
     success: state.loanList.success,
     token: state.loanList.token

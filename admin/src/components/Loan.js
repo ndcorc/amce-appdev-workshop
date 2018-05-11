@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import { Button, Table } from 'semantic-ui-react';
+import { Button, Table, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import FaEllipsisH from 'react-icons/lib/fa/ellipsis-h';
 
@@ -30,9 +30,6 @@ class Loan extends Component {
   toggle() { this.setState({ dropdownOpen: !this.state.dropdownOpen }); }
   toggleHover() { this.setState({ hover: !this.state.hover }); }
   toggleModal() { this.setState({ modal: !this.state.modal }); }
-  rowHovered = (hoverState) => {
-    this.setState({ rowHover: hoverState })
-  }
   deleteProfile() {
     this.props.deleteProfile(this.state.index);
   }
@@ -60,8 +57,12 @@ class Loan extends Component {
       iColor = "rgb(100, 100, 100)";
       bgColor = "transparent";
     }
+    var warningState = (this.props.unreadMsg.profiles.includes(this.props.index)) ? true : false;
     return (
-      <Table.Row key={this.state.index} negative={false} onMouseEnter={this.rowHovered(true)} onMouseLeave={this.rowHovered(false)}>
+      <Table.Row className="trWarning" key={this.state.index} negative={false} 
+                 onMouseEnter={() => this.setState({rowHover: true})} 
+                 onMouseLeave={() => this.setState({rowHover: false})}
+                 warning={warningState}>
         <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
           <ModalHeader toggle={this.toggleModal}>Update Loan Status</ModalHeader>
           <ModalBody>Change loan status {(this.props.loan.status === "Current") ? "to Completed" : "back to Current"}?</ModalBody>
@@ -70,7 +71,10 @@ class Loan extends Component {
             <Button positive icon='checkmark' labelPosition='right' content='Yes' onClick={this.updateStatus} />
           </ModalFooter>
         </Modal>
-        <Table.Cell>{this.props.loan['cudlId']}</Table.Cell>
+        <Table.Cell>
+          {warningState ? <Icon name="attention"/> : null}
+          {this.props.loan['cudlId']}
+        </Table.Cell>
         <Table.Cell>{this.props.loan['loanee']}</Table.Cell>
         <Table.Cell>{"$"+(this.props.loan['value'].toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'))}</Table.Cell>
         <Table.Cell>{this.props.loan['dealership']}</Table.Cell>
@@ -92,7 +96,7 @@ class Loan extends Component {
                             onMouseLeave={this.toggleHover}>
               <FaEllipsisH style={{color: iColor}}/>
             </DropdownToggle>
-            <DropdownMenu right>
+            <DropdownMenu down>
               <Link to={'/update_profile/'+this.props.loan.mcsId}><DropdownItem style={{fontSize: "20px"}}>Update Profile</DropdownItem></Link>
               <Link to={'/notify_dealer/'+this.props.loan.mcsId}><DropdownItem style={{fontSize: "20px"}}>Notify Dealer</DropdownItem></Link>
               <Link to={'/messages/'+this.props.loan.mcsId}><DropdownItem style={{fontSize: "20px"}}>Message History</DropdownItem></Link>

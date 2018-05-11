@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Platform } from "react-native";
+import { Platform, RefreshControl } from "react-native";
 import {
   Container, Header, Title, Text, Content, 
   Button, Icon, List, ListItem, Separator,
@@ -13,11 +13,24 @@ import styles from "./styles";
 export default class LoanList extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      refreshing: false
+    };
   }
 
   navigate = (i) => {
     this.props.navigate("LoanProfile", {index: i});
+  }
+
+  _onRefresh() {
+    this.setState({refreshing: true});
+    this.props.refresh();
+  }
+
+  componentDidUpdate = (prevProps, prevState) => {
+    if (prevProps.loans !== this.props.loans) {
+      this.setState({refreshing: false});
+    }
   }
 
   renderLoans = () => {
@@ -54,7 +67,12 @@ export default class LoanList extends Component {
       )
     }
     return (
-      <Content>
+      <Content refreshControl={
+        <RefreshControl
+          refreshing={this.state.refreshing}
+          onRefresh={this._onRefresh.bind(this)}
+        />
+      }>
         <Separator style={{height: 3}}/>
         <List>
           {loans}
