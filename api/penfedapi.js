@@ -112,13 +112,14 @@ module.exports = function(service) {
         if (notification) {
           req.oracleMobile.notification.post(notification, context)
             .then(notifyResult => {
-              var data = JSON.parse(result.result);
-              res.send(200, result.result);
+              var data = JSON.parse(notifyResult.result);
+              res.send(200, notifyResult.result);
             },
-            error => {
-              res.send(400, error.error);
+            notifyError => {
+              res.send(400, notifyError.error);
             })
         }
+        res.send(200, result.result);
       },
       error => {
         res.send(400, error.error);
