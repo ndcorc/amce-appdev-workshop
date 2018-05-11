@@ -12,60 +12,6 @@ import UpdateProfile from './components/UpdateProfile';
 import NotifyDealer from './components/NotifyDealer';
 import Page404 from './components/Page404';
 
-import * as firebase from 'firebase';
-
-const fbConfig = {
-  apiKey: "AIzaSyASKCTX_UBmTSmdN4jKrzjzX_a_vhUBQK0",
-  authDomain: "creditunion-7fee3.firebaseapp.com",
-  databaseURL: "https://creditunion-7fee3.firebaseio.com",
-  projectId: "creditunion-7fee3",
-  storageBucket: "",
-  messagingSenderId: "1054553748518"
-}
-firebase.initializeApp(fbConfig);
-
-const messaging = firebase.messaging();
-messaging.usePublicVapidKey(config.KEYS.firebase);
-messaging.requestPermission()
-  .then(() => {
-    console.log('Notification permission granted.');
-    messaging.getToken()
-      .then(currentToken => {
-        if (currentToken) {
-          //sendTokenToServer(currentToken);
-          //updateUIForPushEnabled(currentToken);
-        } else {
-          // Show permission request.
-          console.log('No Instance ID token available. Request permission to generate one.');
-          // Show permission UI.
-          //updateUIForPushPermissionRequired();
-          //setTokenSentToServer(false);
-        }
-      })
-      .catch(err => {
-        console.log('An error occurred while retrieving token. ', err);
-        //showToken('Error retrieving Instance ID token. ', err);
-        //setTokenSentToServer(false);
-      });
-  })
-  .catch(err => {
-    console.log('Unable to get permission to notify.', err);
-  });
-
-// Callback fired if Instance ID token is updated.
-messaging.onTokenRefresh(() => {
-  messaging.getToken()
-    .then(refreshedToken => {
-      console.log('Token refreshed.');
-      //setTokenSentToServer(false);
-      //sendTokenToServer(refreshedToken);
-    })
-    .catch(err => {
-      console.log('Unable to retrieve refreshed token ', err);
-      //showToken('Unable to retrieve refreshed token ', err);
-    });
-});
-
 class App extends Component {
 
   constructor(props) {
