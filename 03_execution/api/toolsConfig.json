@@ -1,0 +1,37 @@
+
+{
+    "apiName":"PenFedAPI",
+    "apiVersion":"1.0",
+    "apiId":"c4d96046-0a1f-4d4e-a1ef-0ee72ef6a4ba",
+    "baseUrl":"https://2E1DF6F175974BB19E70DE0CACC3D0FC.uscom-central-1.oraclecloud.com:443",
+    "tokenEndpoint":"https://idcs-d613e1d85d7c45e5898eb526eceb0871.identity.oraclecloud.com/oauth2/v1/token",
+    "backend":{
+        "backendId":"<YOUR_BACKEND_ID>",
+        "backendName":"<YOUR_BACKEND_NAME>",
+        "backendVersion":"<YOUR_BACKEND_VERSION>",
+        "authorization":{
+            "anonymousKey":"<BACKEND_ANONYMOUS_KEY>",
+            "clientId":"<BACKEND_CLIENT_ID>",
+            "clientSecret":"<BACKEND_CLIENT_SECRET>"
+        }
+    },
+    "tools":{
+        "deployment":{
+            "tempDirectory":"c:\\tmp\\mcs-deploy"
+        },
+        "authorization":{
+            "clientId":"<OMCE_TM_APP_CLIENT_ID>",
+            "clientSecret":"<OMCE_TM_APP_CLIENT_SECRET>"
+        }
+    },
+    "container":{
+        "oracleMobileApiName":"OracleMobileAPI",
+        "port":4000
+    },
+    "tests":{
+        "getLoans":{
+            "method":"GET",
+            "resource":"/loans"
+        }
+    }
+}

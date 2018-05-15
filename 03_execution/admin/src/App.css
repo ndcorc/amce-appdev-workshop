@@ -1,0 +1,98 @@
+.App {
+  font-size: 20px;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  height: 100%;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.navbar {
+  background-color: white;
+  height: 100%;
+}
+
+.navbar-brand {
+  padding: 20px 100px;
+}
+
+.img-responsive {
+  height: auto;
+  width: auto;
+  max-width: 300px;
+}
+
+.nav-item {
+  padding: 0px 20px;
+  padding-top: 10px;
+  font-size: 25px;
+  text-transform: uppercase;
+}
+
+.col-form-label {
+  text-align: right;
+}
+
+.content-title {
+  font-size: 50px;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border-color: transparent;
+  padding: 0 6px; 
+}
+
+svg {
+  color: rgb(100, 100, 100);
+  width: 40px;
+  height: auto;
+}
+
+.table-hover tbody tr:hover td svg, .table-hover tbody tr:hover th svg {
+  color: rgb(0, 47, 255);
+}
+
+.table-hover
+.btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active {
+  color: white;
+  background-color: rgb(0, 47, 255);
+  border-color: transparent; /*set the color you want here*/
+}
+
+.table-hover
+.btn-secondary:hover svg, .btn-secondary:focus svg, .btn-secondary:active svg {
+  color: white;
+}
+
+.dropdown-menu {
+  font-size: 20px;
+}
+
+span.input-group-text {
+  font-size: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.ui.table td.warning, .ui.table tr.warning.trWarning {
+  background-color: rgb(255, 243, 205) !important;
+  border-color: #ffeeba !important;
+}
