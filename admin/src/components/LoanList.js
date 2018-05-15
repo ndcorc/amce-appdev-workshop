@@ -40,7 +40,7 @@ class LoanList extends Component {
       for (var i = 0; i < this.props.loans.length; i++) {
         var msgs = this.props.loans[i].messages;
         for (var j = 0; j < msgs.length; j++) {
-          if (msgs[j].to === "PenFed Loan Processor" && msgs[j].unread === true) {
+          if (msgs[j].to === "Credit Union Loan Processor" && msgs[j].unread === true) {
             profiles.push(i);
             unread = true;
           }
@@ -88,7 +88,7 @@ class LoanList extends Component {
     loan.status = newStatus;
     loan.lastNotification = new Date().toLocaleString();
     var msg = {
-      from: "PenFed Loan Processor", 
+      from: "Credit Union Loan Processor", 
       to: loan.contact_name, 
       subject: "Loan Status Updated",
       message: (loan.status === "Current") ?
@@ -182,8 +182,8 @@ class LoanList extends Component {
                 </Container>
               </CardLink>
               <CardBody>
-                <Container>
-                  <Table sortable striped selectable stackable collapsing style={{fontSize: "15px", width: "inherit"}}>
+                <Container style={{overflow: "visible"}}>
+                  <Table sortable striped selectable stackable collapsing style={{fontSize: "15px", width: "inherit", overflow: "visible"}}>
                     <Table.Header>
                       <Table.Row className="title">
                         <Table.HeaderCell sorted={column === 'cudlId' ? direction : null} onClick={this.handleSort('cudlId')}>Loan ID</Table.HeaderCell>

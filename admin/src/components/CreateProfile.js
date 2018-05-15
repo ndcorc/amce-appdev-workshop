@@ -26,9 +26,9 @@ const loanIdMask = createNumberMask({
 });
 const DEBUG = true;
 const create_msg = {
-  from: "PenFed Loan Processor",
+  from: "Credit Union Loan Processor",
   subject: "Notification Channel Created",
-  message: "A PenFed notification channel has just been created for this loan profile.",
+  message: "A Credit Union notification channel has just been created for this loan profile.",
   unread: true
 }
 
@@ -41,8 +41,8 @@ class CreateProfile extends Component {
         mcsId: null, cudlId: "", value: "",
         lastNotification: null,
         status: "Current", dealership: "Fred Haas Toyota", 
-        loanee: "", contact_mobile: "(832) 622-1587", 
-        contact_name: "Nolan Corcoran", messages: [],
+        loanee: "", contact_mobile: "(832) 615-1543", 
+        contact_name: "Lisa Mitchell", messages: [],
         saved: false, success: false, error: false
       };
     } else {

@@ -21,7 +21,7 @@ class Messages extends Component {
       replyClicked: false,
       reply: {
         to: null,
-        from: "PenFed Loan Processor",
+        from: "Credit Union Loan Processor",
         subject: "",
         message: "",
         time: null
@@ -76,7 +76,7 @@ class Messages extends Component {
     loan.messages[i].unread = false;
     loan.lastNotification = new Date().toLocaleString();
     var msg = {
-      from: "PenFed Loan Processor",
+      from: "Credit Union Loan Processor",
       to: this.state.loan.contact_name,
       subject: "Message Read",
       message: "Your notification message has been read.",
@@ -103,7 +103,7 @@ class Messages extends Component {
     //console.log(this.state.messages.length);
     for (var i = 0; i < this.state.messages.length; i++) {
       var msg = this.state.messages[i];
-      if (direction === 'inbound' && msg.to === "PenFed Loan Processor") {
+      if (direction === 'inbound' && msg.to === "Credit Union Loan Processor") {
         msg_list.push(
           <Table.Row key={i} style={{cursor: "pointer"}}
                      onClick={this.readMessage(i)}
@@ -114,7 +114,7 @@ class Messages extends Component {
             <Table.Cell>{msg.subject}</Table.Cell>
           </Table.Row>
         );
-      } else if(direction === 'outbound' && msg.from === "PenFed Loan Processor") {
+      } else if(direction === 'outbound' && msg.from === "Credit Union Loan Processor") {
         msg_list.push(
           <Table.Row key={i} style={{cursor: "pointer"}}
                      onClick={this.readMessage(i)}>

@@ -35,7 +35,7 @@ class LoanProfile extends Component {
     console.log(config)
     loan.messages.push({
       from: loan.contact_name,
-      to: "PenFed Loan Processor", 
+      to: "Credit Union Loan Processor", 
       subject: "New Response in CUDL",
       message: "A new response has been entered into the CUDL system.",
       time: loan.lastNotification,
@@ -69,7 +69,7 @@ class LoanProfile extends Component {
             </Button>
           </Left>
           <Body>
-            <Title>Notify PenFed</Title>
+            <Title>Notify Contact</Title>
           </Body>
           <Right />
         </Header>
@@ -130,7 +130,7 @@ class LoanProfile extends Component {
   render() {
     return (
       <Container className=""> {
-        this.props.unreadMsg !== {} ? 
+        this.props.loans !== [] ? 
         this.renderData() :
         <Container className="">
         </Container>
@@ -145,17 +145,18 @@ LoanProfile.propTypes = {
   loans: PropTypes.array,
   column: PropTypes.string,
   direction: PropTypes.string,
-  unreadMsg: PropTypes.object,
+  notifications: PropTypes.array,
+  token: PropTypes.string,
   success: PropTypes.bool
 };
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     loans: state.loanList.loans,
     column: state.loanList.column,
     direction: state.loanList.direction,
-    unreadMsg: state.loanList.unreadMsg,
+    notifications: state.loanList.notifications,
+    token: state.loanList.token,
     success: state.loanList.success
   };
 }

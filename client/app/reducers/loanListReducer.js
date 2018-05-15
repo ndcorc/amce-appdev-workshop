@@ -1,7 +1,8 @@
 import initialState from './initialState';
 import {
-  FETCH_LOANS, GET_LOANS, NEW_MESSAGE,
-  UPDATE_LOAN, SORT_LOANS, UPDATE_UNREAD
+  FETCH_LOANS, GET_LOANS, FETCH_DEALER, GET_DEALER,
+  UPDATE_LOAN, SORT_LOANS, UPDATE_UNREAD, 
+  NEW_NOTIFICATION, CLEAR_NOTIFICATIONS,
 } from '../actions/actionTypes';
 import _ from 'lodash';
 
@@ -20,11 +21,20 @@ export default function loanList(state = initialState.loanList, action) {
         loans: action.loans,
         column: "status",
         direction: "ascending",
-        unreadMsg: {
-          unread: false,
-          profile: 1
-        },
         success: false
+      }
+
+    case FETCH_DEALER:
+      console.log('FETCH_DEALER Action')
+      return action;
+      
+    case GET_DEALER:
+      console.log('RECEIVE_DEALER Action')
+      console.log(state);
+      return {
+        ...state,
+        token: action.token,
+        notifications: action.notifications
       }
 
     case UPDATE_LOAN:
@@ -58,6 +68,22 @@ export default function loanList(state = initialState.loanList, action) {
       return {
         ...state,
         unreadMsg: action.unreadMsg
+      }
+
+    case NEW_NOTIFICATION:
+      newState = state;
+      newState.notifications.push(action.notification);
+      return {
+        ...state,
+        notifications: newState.notifications
+      }
+
+    case CLEAR_NOTIFICATIONS:
+      newState = state;
+      newState.notifications = [];
+      return {
+        ...state,
+        notifications: newState.notifications
       }
 
     default:

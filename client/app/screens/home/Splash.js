@@ -4,9 +4,7 @@ import { Container, Button, H3, Text, Spinner } from "native-base";
 
 import styles from "./styles";
 
-const penfedLogo = require('../../assets/penfed.png');
-const launchscreenBg = require("../../assets/launchscreen-bg.png");
-const launchscreenLogo = require("../../assets/logo-kitchen-sink.png");
+const creditunionLogo = require('../../assets/creditunion.jpg');
 
 class Splash extends Component {
   render() {
@@ -14,8 +12,12 @@ class Splash extends Component {
       <Container>
         <StatusBar barStyle="dark-content" />
           <View style={styles.logoContainer}>
-            <Image source={penfedLogo} style={styles.logo} />
-            <Spinner color='#0F2C52' />
+            <View style={{flex: 1, justifyContent: 'center', paddingBottom: 0}}>
+              <Image source={creditunionLogo} style={styles.logo} />
+            </View>
+            <View style={{flex: 1, paddingTop: 0}}>
+              <Spinner color='#0F2C52' />
+            </View>
           </View>
       </Container>
     );

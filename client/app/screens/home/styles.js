@@ -22,8 +22,9 @@ export default {
   },
   logoContainer: {
     flex: 1,
-    marginTop: deviceHeight / 5,
-    marginBottom: 30
+    marginTop: 0,
+    marginBottom: 0,
+    justifyContent: 'center'
   },
   logo: {
     resizeMode: 'contain',

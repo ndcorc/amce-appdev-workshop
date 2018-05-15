@@ -17,6 +17,20 @@ export const getLoans = (loans) => {
   return {type: types.GET_LOANS, loans: loans};
 }
 
+export const fetchDealer = () => {
+  return dispatch => {
+    return axios.get(config.BASE_URL+'/dealers', config.HEADERS)
+      .then(res => {
+        var dealer = res.data;
+        dispatch(getDealer(dealer))
+      });
+  };
+}
+
+export const getDealer = (dealer) => {
+  return {type: types.GET_LOANS, token: dealer.token, notifications: dealer.notifications};
+}
+
 export const updateLoan = (index, loan) => {
   return {type: types.UPDATE_LOAN, index: index, loan: loan};
 }
@@ -27,4 +41,12 @@ export const updateUnread = (unreadMsg) => {
 
 export const sortLoans = (param=null) => {
   return {type: types.SORT_LOANS, param: param}
+}
+
+export const newNotification = (notification) => {
+  return {type: types.NEW_NOTIFICATION, notification: notification}
+}
+
+export const clearNotifications = () => {
+  return {type: types.CLEAR_NOTIFICATIONS}
 }

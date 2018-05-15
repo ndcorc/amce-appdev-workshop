@@ -84,7 +84,7 @@ class Messages extends Component {
   render(){
     return(
       <Container className=""> {
-        this.props.unreadMsg !== {} ? 
+        this.props.loans !== [] ? 
         this.renderData() :
         <Container className="">
         </Container>
@@ -99,17 +99,18 @@ Messages.propTypes = {
   loans: PropTypes.array,
   column: PropTypes.string,
   direction: PropTypes.string,
-  unreadMsg: PropTypes.object,
+  notifications: PropTypes.array,
+  token: PropTypes.string,
   success: PropTypes.bool
 };
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     loans: state.loanList.loans,
     column: state.loanList.column,
     direction: state.loanList.direction,
-    unreadMsg: state.loanList.unreadMsg,
+    notifications: state.loanList.notifications,
+    token: state.loanList.token,
     success: state.loanList.success
   };
 }

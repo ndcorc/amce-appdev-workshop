@@ -24,7 +24,7 @@ const loanIdMask = createNumberMask({
   allowLeadingZeroes: true
 });
 const update_msg = {
-  from: "PenFed Loan Processor",
+  from: "Credit Union Loan Processor",
   subject: "Profile Updated",
   message: "Your loan profile has been updated.",
   unread: true

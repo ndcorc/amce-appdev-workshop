@@ -9,13 +9,18 @@ import {bindActionCreators} from 'redux';
 import * as loanListActions from '../../actions/loanListActions';
 import PropTypes from 'prop-types';
 
+import IconBadge from 'react-native-icon-badge';
+
 import Dashboard from './Dashboard';
 import LoanList from './LoanList';
 
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = { seg: 1 };
+    this.state = { 
+      seg: 1,
+      badgeCount: 3
+    };
   }
 
   componentDidMount = () => {
@@ -36,12 +41,25 @@ class Home extends Component {
             </Button>
           </Left>
           <Body>
-            <Title>PenFed Notify</Title>
+            <Title>Loan Profiles</Title>
           </Body>
           <Right>
-            <Button transparent>
-              <Icon name="search" />
-            </Button>
+            <IconBadge MainElement={
+              <Button transparent onPress={() => this.props.navigation.navigate("Notifications")}>
+                <Icon name="notifications" style={{fontSize: 35}}/>
+              </Button>
+            }
+            BadgeElement={
+              <Text style={{color:'#FFFFFF'}}>{this.props.notifications.length}</Text>
+            }
+            IconBadgeStyle={
+              {
+                width:20,
+                height:20,
+                backgroundColor: 'red'
+              }
+            }
+            Hidden={this.props.notifications.length==0} />
           </Right>
         </Header>
         <Segment>
@@ -66,7 +84,7 @@ class Home extends Component {
   render() {
     return (
       <Container className=""> {
-        this.props.unreadMsg !== {} ? 
+        this.props.notifications !== [] ? 
         this.renderData() :
         <Container className="">
         </Container>
@@ -81,7 +99,8 @@ Home.propTypes = {
   loans: PropTypes.array,
   column: PropTypes.string,
   direction: PropTypes.string,
-  unreadMsg: PropTypes.object,
+  notifications: PropTypes.array,
+  token: PropTypes.string,
   success: PropTypes.bool
 };
 
@@ -91,7 +110,8 @@ function mapStateToProps(state) {
     loans: state.loanList.loans,
     column: state.loanList.column,
     direction: state.loanList.direction,
-    unreadMsg: state.loanList.unreadMsg,
+    notifications: state.loanList.notifications,
+    token: state.loanList.token,
     success: state.loanList.success
   };
 }

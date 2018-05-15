@@ -6,7 +6,7 @@ import {
 } from "native-base";
 import styles from "./style";
 
-const penfedCover = require("../../assets/penfedCover.jpg");
+const creditunionCover = require("../../assets/creditunionCover.png");
 const datas = [
   {
     name: "Home",
@@ -30,7 +30,7 @@ class SideBar extends Component {
     return (
       <Container>
         <Content bounces={false} style={{ flex: 1, backgroundColor: "#fff", top: -1 }}>
-          <Image style={styles.drawerCover} source={penfedCover} />
+          <Image style={styles.drawerCover} source={creditunionCover} />
           <List dataArray={datas} renderRow={ data =>
             <ListItem button noBorder onPress={() => this.props.navigation.navigate(data.route)}>
               <Left>

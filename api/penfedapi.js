@@ -42,7 +42,6 @@ module.exports = function(service) {
               if (itemsProcessed === items.length) { res.send(200, loans); }
             });
         });
-        
       });
   });
 
@@ -75,14 +74,14 @@ module.exports = function(service) {
         req.oracleMobile.notification.post(notification, context)
           .then(notifyResult => {
             var data = JSON.parse(result.result);
-            res.send(200, result.result);
+            res.send(200, data);
           },
           error => {
-            res.send(400, error.error);
+            res.send(400, JSON.parse(error.error));
           })
       },
       error => {
-        res.send(400, error.error);
+        res.send(400, JSON.parse(error.error));
       })
   });
   /**
@@ -111,18 +110,18 @@ module.exports = function(service) {
       .then(result => {
         if (notification) {
           req.oracleMobile.notification.post(notification, context)
-            .then(notifyResult => {
-              var data = JSON.parse(notifyResult.result);
-              res.send(200, notifyResult.result);
+            .then(result => {
+              var data = JSON.parse(result.result);
+              res.send(200, data);
             },
-            notifyError => {
-              res.send(400, notifyError.error);
+            error => {
+              res.send(400, JSON.parse(error.error));
             })
         }
-        res.send(200, result.result);
+        res.send(200, JSON.parse(result.result));
       },
       error => {
-        res.send(400, error.error);
+        res.send(400, JSON.parse(error.error));
       })
   });
   /**
@@ -142,10 +141,10 @@ module.exports = function(service) {
     };*/
     req.oracleMobile.storage.remove('Loans', req.params.id)
       .then(result => {
-        res.send(200, result.result);
+        res.send(200, JSON.parse(result.result));
       },
       error => {
-        res.send(400, error.error);
+        res.send(400, JSON.parse(error.error));
       })
   });
 
@@ -170,12 +169,14 @@ module.exports = function(service) {
 	service.post(url+'/dealers', function(req, res) {
 		var result = {};
     var statusCode = 201;
-    var token = {
-      "token": req.body.notificationToken
+    var dealer = {
+      "name": "Nolan Corcoran",
+      "token": req.body.notificationToken,
+      "notifications": []
     }
     req.oracleMobile.devices.register(req.body)
       .then(result => {
-        req.oracleMobile.storage.storeById('Dealers', "b19ec240-dfcc-4e40-9a7b-686f14619114", JSON.stringify(token))
+        req.oracleMobile.storage.storeById('Dealers', "b19ec240-dfcc-4e40-9a7b-686f14619114", JSON.stringify(dealer))
           .then(result => {
             var data = JSON.parse(result.result);
             res.send(200, result.result);
@@ -185,9 +186,27 @@ module.exports = function(service) {
           })
       },
       error => {
-        res.send(error.statusCode, error.error);
-      }
-    );
+        res.send(400, error.error);
+      });
   });
 
+	service.put(url+'/dealers', function(req, res) {
+		var result = {};
+    var statusCode = 201;
+    var notification = req.body;
+    req.oracleMobile.storage.getById("Dealers", "b19ec240-dfcc-4e40-9a7b-686f14619114")
+      .then(function (result) {
+        return result.result;
+      })
+      .then(dealer => {
+        dealer.notifications.push(notification);
+        req.oracleMobile.storage.storeById('Dealers', "b19ec240-dfcc-4e40-9a7b-686f14619114", JSON.stringify(dealer))
+          .then(result => {
+            res.send(200, result.result);
+          },
+          error => {
+            res.send(400, error.error);
+          })
+      });
+  });
 };

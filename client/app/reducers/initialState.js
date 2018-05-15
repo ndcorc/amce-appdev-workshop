@@ -3,7 +3,8 @@ export default {
     loans: [],
     column: null,
     direction: null,
-    unreadMsg: {},
+    notifications: [],
+    token: null,
     success: null
   }
 };
