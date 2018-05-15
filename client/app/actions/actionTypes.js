@@ -1,9 +1,0 @@
-export const FETCH_LOANS = 'FETCH_LOANS';
-export const GET_LOANS = 'GET_LOANS';
-export const FETCH_DEALER = 'FETCH_DEALER';
-export const GET_DEALER = 'GET_DEALER';
-export const UPDATE_LOAN = 'UPDATE_LOAN';
-export const UPDATE_UNREAD = 'UPDATE_UNREAD';
-export const SORT_LOANS = 'SORT_LOANS';
-export const NEW_NOTIFICATION = 'NEW_NOTIFICATION';
-export const CLEAR_NOTIFICATIONS = 'CLEAR_NOTIFICATIONS';
