@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>client.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>armv7</string>
+				<string>arm64</string>
+			</array>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>618806EB29514B2A7E03C6847727B83331DDE85C</string>
+				<key>dateExpires</key>
+				<string>9/8/18</string>
+				<key>type</key>
+				<string>iOS Distribution</string>
+			</dict>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>86KJVSY6KU.com.oraclecorp.internal.ent3.creditunionclient</string>
+				<key>com.apple.developer.team-identifier</key>
+				<string>86KJVSY6KU</string>
+				<key>get-task-allow</key>
+				<false/>
+				<key>keychain-access-groups</key>
+				<array>
+					<string>86KJVSY6KU.com.oraclecorp.internal.ent3.creditunionclient</string>
+				</array>
+			</dict>
+			<key>name</key>
+			<string>client.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>f5511153-6042-4be1-9ffa-0c5c9ff15e6d</string>
+				<key>name</key>
+				<string>Oracle Ent3 2017</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>86KJVSY6KU</string>
+				<key>name</key>
+				<string>Oracle Corporation (Ent 3)</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>
