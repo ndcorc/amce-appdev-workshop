@@ -1,0 +1,41 @@
+
+{
+    "apiName":"CreditUnionAPI",
+    "apiVersion":"1.0",
+    "apiId":"badabc39-6904-4747-823d-ad76efd7e97e",
+    "baseUrl":"http://<MCS_SERVER>:<MCS_PORT>/",
+    "authorization":{
+        "mobileBackendID":"<YOUR_MOBILE_BACKEND_ID>",
+        "anonymousKey":"<MBE_ANONYMOUS_KEY>",
+        "oauth":{
+            "tokenEndpoint":"<MBE_OAUTH_TOKEN_ENDPOINT>",
+            "clientId":"<MBE_OAUTH_CLIENT_ID>",
+            "clientSecret":"<MBE_OAUTH_CLIENT_ID>"
+        }
+    },
+    "container":{
+        "oracleMobileApiName":"OracleMobileAPI",
+        "port":4000
+    },
+    "deploy":{
+        "tempDirectory":"/tmp/mcs-deploy"
+    },
+    "tests":{
+        "getDownload_pkpass":{
+            "method":"GET",
+            "resource":"/download_pkpass"
+        },
+        "getCheck_mobile":{
+            "method":"GET",
+            "resource":"/check_mobile"
+        },
+        "getCheck_card":{
+            "method":"GET",
+            "resource":"/check_card"
+        },
+        "getGet_images":{
+            "method":"GET",
+            "resource":"/get_images"
+        }
+    }
+}

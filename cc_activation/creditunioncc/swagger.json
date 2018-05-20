@@ -1,0 +1,54 @@
+{
+    "apiVersion": "1.0",
+    "swaggerVersion": "1.2",
+    "basePath": "/mobile/custom/CreditUnionCC",
+    "apis": [
+      {
+        "path": "/components",
+        "operations": [
+          {
+            "type": "void",
+            "method": "GET",
+            "nickname": "GET",
+            "parameters": [],
+            "summary": "Get Metadata",
+            "notes": "Get all component metadata",
+            "responseMessages": [
+              { "code": 200, "message": "All component metadata" }
+            ],
+            "produces": ["application/json"]
+          }
+        ]
+      },
+      {
+        "path": "/components/{componentName}",
+        "operations": [
+          {
+            "type": "void",
+            "method": "POST",
+            "nickname": "POST",
+            "parameters": [
+              {
+                "name": "componentName",
+                "description": "Component name",
+                "type": "string",
+                "paramType": "path",
+                "allowMultiple": false,
+                "required": true
+              },
+              { "name": "body", "type": "string", "paramType": "body" }
+            ],
+            "summary": "Invoke Component",
+            "notes": "Invoke component by name",
+            "consumes": ["application/json"]
+          }
+        ]
+      }
+    ],
+    "models": {},
+    "info": {
+      "title": "CreditUnionCC",
+      "description": "Custom Components API for Credit Union Chatbot"
+    }
+  }
+  

@@ -1,0 +1,6 @@
+{
+    "runtime": {
+        "majorVersion": "2.7.14"
+    },
+    "command": "sh ./start.sh"
+}

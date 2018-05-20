@@ -1,0 +1,72 @@
+#%RAML 0.8
+title: CreditUnionAPI
+version: 1.0
+baseUri: /mobile/custom/CreditUnionAPI
+protocols: [HTTPS]
+/check_mobile:
+  displayName: Check Mobile
+  get:
+    displayName: Check Mobile
+    protocols: [HTTPS]
+    queryParameters:
+      number:
+        displayName: Mobile Phone Number
+        type: string
+        required: true
+/get_images:
+  displayName: Get Images
+  get:
+    displayName: Get Images
+    description: |
+      Get credit card images
+      
+    protocols: [HTTPS]
+    queryParameters:
+      number:
+        displayName: Mobile Phone Number
+        type: string
+        required: true
+/read_card:
+  displayName: Read Card
+  post:
+    protocols: [HTTPS]
+    body:
+      multipart/form-data:
+        formParameters:
+          imageUrl:
+            displayName: URL of Credit Card Image
+            type: string
+            required: true
+/check_card:
+  displayName: Check Card
+  get:
+    displayName: Check Card
+    description: |
+      Check credit card number
+      
+    protocols: [HTTPS]
+    queryParameters:
+      number:
+        displayName: Mobile Phone Number
+        type: string
+        example: |
+          8326221587
+          
+        required: true
+      cardNumber:
+        displayName: Credit Card Number
+        type: string
+        required: true
+/download_pkpass:
+  displayName: Download PKPass
+  get:
+    displayName: Download PKPass
+    description: |
+      Download .pkpass file
+    queryParameters:
+      cc:
+        displayName: credit card filename
+        type: string
+        example: |
+          cc2
+        required: true
