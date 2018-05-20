@@ -16,17 +16,17 @@ class PushCtrl extends Component {
     this.state = { };
   }
 
-  componentDidMount = () => {
+  componentWillMount = () => {
     this.props.loanListActions.fetchLoans();
     PushNotification.configure({
       // (optional) Called when Token is generated (iOS and Android)
       onRegister: function(token) {
-        console.log( '\n\nTOKEN VALUE: ' + token.token + '\n\n');
+        console.log( 'TOKEN VALUE: ' + token.token );
         config.NOTIFICATIONS.notificationToken = token.token;
         axios.post(config.BASE_URL+'/dealers', config.NOTIFICATIONS, config.HEADERS)
           .then(res => {
-            console.log(Object.keys(res));
-            console.log(JSON.stringify(res));
+            //console.log(JSON.stringify(res));
+            PushNotification.setApplicationIconBadgeNumber(0);
           })
           .catch(err => {
             console.log(err);
@@ -37,16 +37,7 @@ class PushCtrl extends Component {
       onNotification: function(notification) {
         console.log( 'NOTIFICATION:', notification );
         // process the notification
-        this.props.loanListActions.newNotification(notification);
-        PushNotification.setApplicationIconBadgeNumber(this.props.notifications.length);
-        axios.put(config.BASE_URL+'/dealers', notification, config.HEADERS)
-          .then(res => {
-            //this.props.loanListActions.newNotification(notification);
-            //PushNotification.setApplicationIconBadgeNumber(this.props.notifications.length);
-          })
-          .catch(err => {
-            console.log(err);
-          })
+        PushNotification.setApplicationIconBadgeNumber(1);
         // required on iOS only (see fetchCompletionHandler docs: https://facebook.github.io/react-native/docs/pushnotificationios.html)
         notification.finish(PushNotificationIOS.FetchResult.NoData);
       },
@@ -64,6 +55,7 @@ class PushCtrl extends Component {
       // Should the initial notification be popped automatically
       // default: true
       popInitialNotification: true,
+      
       /**
         * (optional) default: true
         * - Specified if permissions (ios) and token (android and ios) will requested or not,
