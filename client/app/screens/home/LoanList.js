@@ -34,49 +34,45 @@ export default class LoanList extends Component {
   }
 
   renderLoans = () => {
-    var loans = [];
-    for (let i = 0; i < this.props.loans.length; i++) {
-      loans.push(
-        <ListItem icon onPress={() => this.navigate(i)}>
-          <Left>
-            {
-              this.props.loans[i].status === "Current" ?
-              <FaIcon active name="arrow-circle-up" color={"red"} size={35}/> :
-              <FaIcon active name="check-circle" color={"green"} size={35}/>
-            }
-          </Left>
-          <Body>
-            <Text>{this.props.loans[i].loanee}</Text>
-            <Text note>{this.props.loans[i].status}</Text>
-          </Body>
-          <Right>
-            <Text>
-            {
-              "$"+this.props.loans[i].value.toLocaleString(
-                options={
-                  style: "currency",
-                  currency: "USD",
-                  currencyDisplay: "symbol"
-                }
-              )
-            }
-            </Text>
-            <Icon active name="arrow-forward" />
-          </Right>
-        </ListItem>
-      )
-    }
     return (
-      <Content refreshControl={
-        <RefreshControl
-          refreshing={this.state.refreshing}
-          onRefresh={this._onRefresh.bind(this)}
-        />
-      }>
+      <Content>
         <Separator style={{height: 3}}/>
-        <List>
-          {loans}
-        </List>
+        <List refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh.bind(this)}
+            dataArray={this.props.loans}
+            renderRows={(loan) => {
+              <ListItem icon onPress={() => this.navigate(i)}>
+                <Left>
+                  {
+                    loan.status === "Current" ?
+                    <FaIcon active name="arrow-circle-up" color={"red"} size={35}/> :
+                    <FaIcon active name="check-circle" color={"green"} size={35}/>
+                  }
+                </Left>
+                <Body>
+                  <Text>{loan.loanee}</Text>
+                  <Text note>{loan.status}</Text>
+                </Body>
+                <Right>
+                  <Text>
+                  {
+                    "$"+loan.value.toLocaleString(
+                      options={
+                        style: "currency",
+                        currency: "USD",
+                        currencyDisplay: "symbol"
+                      }
+                    )
+                  }
+                  </Text>
+                  <Icon active name="arrow-forward" />
+                </Right>
+              </ListItem>
+            }}
+          />
+        }/>
       </Content>
     );
   }
