@@ -19,12 +19,8 @@ export default class LoanList extends Component {
   }
 
   navigate = (i) => {
+    console.log(i);
     this.props.navigate("LoanProfile", {index: i});
-  }
-
-  _onRefresh() {
-    this.setState({refreshing: true});
-    this.props.refresh();
   }
 
   componentDidUpdate = (prevProps, prevState) => {
@@ -33,16 +29,58 @@ export default class LoanList extends Component {
     }
   }
 
-  renderLoans = () => {
+/*   renderLoans = () => {
+    var loans = [];
+    for (var i = 0; i < this.props.loans.length; i++) {
+      loans.push(
+        <ListItem icon onPress={() => this.navigate(i)}>
+          <Left>
+            {
+              loan.status === "Current" ?
+              <FaIcon active name="arrow-circle-up" color={"red"} size={35}/> :
+              <FaIcon active name="check-circle" color={"green"} size={35}/>
+            }
+          </Left>
+          <Body>
+            <Text>{loan.loanee}</Text>
+            <Text note>{loan.status}</Text>
+          </Body>
+          <Right>
+            <Text>
+            {
+              "$"+loan.value.toLocaleString(
+                options={
+                  style: "currency",
+                  currency: "USD",
+                  currencyDisplay: "symbol"
+                }
+              )
+            }
+            </Text>
+            <Icon active name="arrow-forward" />
+          </Right>
+        </ListItem>
+      )
+    }
     return (
-      <Content>
-        <Separator style={{height: 3}}/>
-        <List refreshControl={
-          <RefreshControl
-            refreshing={this.state.refreshing}
-            onRefresh={this._onRefresh.bind(this)}
-            dataArray={this.props.loans}
-            renderRows={(loan) => {
+        <Content>
+          <Separator style={{height: 3}}/>
+          <List>
+            {loans}
+          </List>
+        </Content>
+    );
+  } */
+
+  render() {
+    return (
+      <Container style={styles.container}>
+        <Content>
+          <Separator style={{height: 3}}/>
+          <List>
+          {
+            /* this.renderLoans() */
+            this.props.loans.map(((loan, i) => (
               <ListItem icon onPress={() => this.navigate(i)}>
                 <Left>
                   {
@@ -70,17 +108,10 @@ export default class LoanList extends Component {
                   <Icon active name="arrow-forward" />
                 </Right>
               </ListItem>
-            }}
-          />
-        }/>
-      </Content>
-    );
-  }
-
-  render() {
-    return (
-      <Container style={styles.container}>
-        {this.renderLoans()}
+            )))
+          }
+          </List>
+        </Content>
       </Container>
     );
   }

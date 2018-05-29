@@ -69,7 +69,7 @@ class LoanProfile extends Component {
             </Button>
           </Left>
           <Body>
-            <Title>Notify Contact</Title>
+            <Title>Loan Profile</Title>
           </Body>
           <Right />
         </Header>

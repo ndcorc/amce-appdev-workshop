@@ -8,6 +8,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as loanListActions from '../../actions/loanListActions';
 import PropTypes from 'prop-types';
+import PTRView from 'react-native-pull-to-refresh';
 
 import IconBadge from 'react-native-icon-badge';
 
@@ -27,57 +28,63 @@ class Home extends Component {
     this.props.loanListActions.fetchLoans();
   };
 
-  refresh = () => {
+  _refresh = () => {
+    //this.props.refresh();
     this.props.loanListActions.fetchLoans();
+    return new Promise((resolve) => {
+      setTimeout(()=>{resolve()}, 2000)
+    });
   }
 
   renderData = () => {
     return (
-      <Container style={{ backgroundColor: "#FBFAFA" }}>
-        <Header hasTabs>
-          <Left>
-            <Button transparent onPress={() => this.props.navigation.navigate("DrawerOpen")}>
-              <Icon name="menu" />
-            </Button>
-          </Left>
-          <Body>
-            <Title>Loan Profiles</Title>
-          </Body>
-          <Right>
-            <IconBadge MainElement={
-              <Button transparent onPress={() => this.props.navigation.navigate("Notifications")}>
-                <Icon name="notifications" style={{fontSize: 35}}/>
+      <PTRView onRefresh={this._refresh} >
+        <Container style={{ backgroundColor: "#FBFAFA" }}>
+          <Header hasTabs>
+            <Left>
+              <Button transparent onPress={() => this.props.navigation.navigate("DrawerOpen")}>
+                <Icon name="menu" />
               </Button>
-            }
-            BadgeElement={
-              <Text style={{color:'#FFFFFF'}}>{this.props.notifications.length}</Text>
-            }
-            IconBadgeStyle={
-              {
-                width:20,
-                height:20,
-                backgroundColor: 'red'
+            </Left>
+            <Body>
+              <Title>Loan Profiles</Title>
+            </Body>
+            <Right>
+              <IconBadge MainElement={
+                <Button transparent onPress={() => this.props.navigation.navigate("Notifications")}>
+                  <Icon name="notifications" style={{fontSize: 35}}/>
+                </Button>
               }
-            }
-            Hidden={this.props.notifications.length==0} />
-          </Right>
-        </Header>
-        <Segment>
-          <Button first active={this.state.seg === 1 ? true : false}
-                  onPress={() => this.setState({ seg: 1 })}>
-            <Text>Dashboard</Text>
-          </Button>
-          <Button active={this.state.seg === 2 ? true : false}
-                  onPress={() => this.setState({ seg: 2 })}>
-            <Text>Loan List</Text>
-          </Button>
-        </Segment>
+              BadgeElement={
+                <Text style={{color:'#FFFFFF'}}>{this.props.notifications.length}</Text>
+              }
+              IconBadgeStyle={
+                {
+                  width:20,
+                  height:20,
+                  backgroundColor: 'red'
+                }
+              }
+              Hidden={this.props.notifications.length==0} />
+            </Right>
+          </Header>
+          <Segment>
+            <Button first active={this.state.seg === 1 ? true : false}
+                    onPress={() => this.setState({ seg: 1 })}>
+              <Text>Dashboard</Text>
+            </Button>
+            <Button active={this.state.seg === 2 ? true : false}
+                    onPress={() => this.setState({ seg: 2 })}>
+              <Text>Loan List</Text>
+            </Button>
+          </Segment>
 
-        <Content padder>
-          {this.state.seg === 1 && <Dashboard loans={this.props.loans} refresh={this.refresh} navigate={this.props.navigation.navigate}/>}
-          {this.state.seg === 2 && <LoanList loans={this.props.loans} refresh={this.refresh} navigate={this.props.navigation.navigate}/>}
-        </Content>
-      </Container>
+          <Content padder>
+            {this.state.seg === 1 && <Dashboard loans={this.props.loans} refresh={this.refresh} navigate={this.props.navigation.navigate}/>}
+            {this.state.seg === 2 && <LoanList loans={this.props.loans} refresh={this.refresh} navigate={this.props.navigation.navigate}/>}
+          </Content>
+        </Container>
+      </PTRView>
     )
   }
   
