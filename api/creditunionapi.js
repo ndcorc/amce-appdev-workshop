@@ -16,7 +16,7 @@ module.exports = function(service) {
 	 *  The file samples.txt in the archive that this file was packaged with contains some example code.
 	 */
 
-  const url = "/mobile/custom/PenFedAPI";
+  const url = "/mobile/custom/CreditUnionAPI";
 
   /**
    *  Loans Collection
