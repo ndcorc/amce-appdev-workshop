@@ -1,12 +1,13 @@
+# Creation and Configuration of Workshop Environment
 
 ![](images/100/Picture100-lab.png)  
 Update: March 31, 2017
 
 ## Introduction
 
-This is the first of several labs that are part of the **Oracle AMCe Push Notifications workshop.** This workshop will walk you through the Software Development Lifecycle (SDLC) for a native mobile application built using Oracle's Autonomous Mobile Cloud Enterprise (AMCe), including **Push Notifications** as well as several other key microservices provided by the platform.
+This is the first of several labs that are part of the Oracle Public Cloud **AMCe with Push Notifications workshop.** This workshop will walk you through the Software Development Lifecycle (SDLC) for a native mobile application built using Oracle's Autonomous Mobile Cloud Enterprise (AMCe), including **Push Notifications** as well as several other key microservices provided by the platform.
 
-During the workshop you will be building a "sideband" notification channel between a web application and a native mobile application. This will be accomplished in 3 main phases. In phase 1, you will create the initial mobile application and, in doing so, set up the AMCe project we will be using as our complete backend solution. Then in phase 2, we will complete the initial implementation of our mobile app by taking the last steps needed to enable push notifications to be sent from our AMCe environment and received on our mobile device. Finally, if you choose to continue forward with the bonus lab, we will deploy an "admin" web application which we will use to send push notifications to our device instead of AMCe. 
+During the workshop you will be building a "sideband" notification channel between an "admin" web application and a "client" native mobile application. This will be accomplished in 3 main phases. In phase 1,you will create the initial mobile application and, in doing so, set up the AMCe project which we will use as our complete backend solution. Then, in phase 2, we will complete the initial implementation of our mobile app by taking the last steps needed to enable our mobile device to recieve push notifications sent from our AMCe environment. Finally, in the bonus lab, we will deploy an "admin" web application which we will use to send push notifications to our mobile device instead of AMCe. 
 
 During this workshop, you will get in depth exposure to Autonomous Mobile Cloud Enterprise, including its integrated cloud services such as API Platform Cloud Service, Storage Cloud Service, Notifications Cloud Service, and several others. Additionally, if you complete the bonus lab, you will gain experience using Oracle Application Container Cloud Service to deploy your web apps. Lastly, during the course of this entire workshop you gain valuable experience using popular open-source technologies together with proprietary tools to develop full-stack applications.
 
