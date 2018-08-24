@@ -1,162 +1,391 @@
-# Creation and Configuration of Storage Microservices
+# Create Custom API with API Designer
 
-![](images/100/Picture100-lab.png)  
+![](images/300/title.png)  
 Update: March 31, 2017
 
 ## Introduction
 
-This is the second of several labs that are part of the **Oracle AMCe Push Notifications workshop.** This workshop will walk you through the Software Development Lifecycle (SDLC) for a native mobile application built using Oracle's Autonomous Mobile Cloud Enterprise (AMCe), including **Push Notifications** as well as several other key microservices provided by the platform.
+This is the third of several labs that are part of the Oracle Public Cloud **AMCe Application Development workshop.** This workshop will walk you through the Software Development Lifecycle (SDLC) for a dual-channel application (web + mobile) built using Oracle's Autonomous Mobile Cloud Enterprise (AMCe) as a complete backend solution.
 
-In the first lab (100), you created a new Mobile Backend (MBE) project in your Autonomous Mobile Cloud Enterprise (AMCe) environment. You also configured your environment by adding Roles for the two users of our MBE, Admins and Dealers. Lastly, we set our environment policies to allow anonymous access to the Loans storage collection. In this lab we will go ahead and actually create the Loans storage collection in our AMCe environment, upload our initial data objects, and use built-in, Storage REST API testing service to access our loan data objects.
+In the first lab (100), you created a new Mobile Backend (MBE) project and configured your Autonomous Mobile Cloud Enterprise (AMCe) environment. In the second lab (200), you created, populated, and tested your MBE's storage collections. In this lab, you will use the AMCe API Platform to design and deploy a custom API.
 
-***To log issues***, click here to go to the [github oracle](https://github.com/oracle/cloud-native-devops-workshop/issues/new) repository issue submission form.
+**Please direct comments to: [Nolan Corcoran](nolan.corcoran@oracle.com)**
 
 ## Objectives
-- Access Autonomous Mobile Cloud Enterprise (AMCe)
-- Create & Configure New Storage Collection
-- Upload Data Objects to Storage Collection
-- Test REST API Access to Storage Collection
+- Create Initial Custom API
+- Create New Resource Endpoints
+- Add HTTP Request Methods to Resource Endpoints
+- Install AMCe CLI Tools
+- Upload Implmentation Code
+- Test API Implementation
 
 ## Required Artifacts
 - The following lab requires an Oracle Public Cloud account that will be supplied by your instructor.
 
+# Create Custom API
 
-# Create Storage Collection
-
-## Create New Loans Collection
+## Create Initial Custom API
 
 ### **STEP 1**: Login to your AMCe environment using IDCS
 - From any browser, go to the URL of your AMCe environment
 
 - If you are not already logged in, you will be redirected to the IDCS login page. There, enter your User Name and Password and click **Sign In**.:
 
-    ![](images/100/100-1.png)
+  ![](images/100/100-1.png)
 
 - If you successfully log in, you will be redirected to the AMCe landing page.
 
-    ![](images/100/100-2.png)
+  ![](images/100/100-2.png)
 
-### **Step 2**: Navigate to your CreditUnion Mobile Backend (MBE) Storage Collections
+### **Step 2**: Create Initial Custom API
 
-In order to create our backend microservices and have them automatically be associated, we will create them with the storage option within the CreditUnion MBE we created in the previous lab.
+In order to create our custom API microservice and have it automatically be associated with our MBE, we will create the custom API with the API section of our CreditUnion MBE page.
 
-- To navigate to our CreditUnion MBE, first **click** on the hamburger menu ![alt text](images/100/menu.png) to pull up the sidebar navigation menu. Then, click on the **Mobile Apps** dropdown and click on the **Backends** option. This will take us to a list of backends we have previously created. From there, click on the backend named **CreditUnion**. Finally, to go into our MBE, click the **Open** button.
+- To navigate to our CreditUnion MBE, first **click** on the hamburger menu ( ![alt text](images/100/100-2-menu.png) ) to pull up the sidebar navigation menu. Then, click on the **Development** dropdown and click on the **Backends** option. This will take us to a list of backends we have previously created. From there, click on the backend named **CreditUnion**. Finally, to go into our MBE, click the **Open** button.
 
   ![](images/200/200-1.png)
 
-- Now that we are in our CreditUnion MBE, click **Storage** in the inner menu on the left side to navigate to the associated storage collections.
+- Now that we are in our CreditUnion MBE, before we go ahead and create the custom API, let's update our MBE Security. Click **Security** in the inner menu on the left side to navigate to the associated MBE security. From there, toggle the **Role-based Access** option and add the **LoanProcessor** and **Dealer** Roles.
 
-  ![](images/100/100-4.png)
+  ![](images/300/300-1.png)
 
-- In this workshop we will be working mostly with **Mobile Apps**. If we click on **Mobile Apps**, we're taken to a dashboard with each of the **Mobile Apps** features and services which is mirrored by the dropdown menu on the left. 
+- Next, click **APIs** from the MBE page navbar and then click the **API** option from the **+ New API** dropdown.
 
-    ![](images/100/Picture100-4.png)
+  ![](images/300/300-2.png)
 
-### **STEP 3**: Create New Mobile Backend (MBE)
+- Fill out the API creation form as follows and then click **Create** to take you to your Custom API page:
 
-Autonomous Mobile Cloud Enterprise (AMCe) was built around the concept of mobile backends, which enable you to develop and deploy different microservices in an integrated fashion by associating them with the same backend. Thus, the **Backends** service is our starting point and, as we go, we will create several of the provided backend microservices such as Client Apps & **App Profiles**, Custom **APIs**, Object **Storage**, and Mobile Users & **Roles**.
+  **API Display Name:** `Sideband Notifications API`
 
-- Click on **Backends** to take you to a list of Mobile Backends (MBEs).
+  **API Name:** `SidebandNotificationsAPI`
 
-  ![](images/100/Picture-01.png)
+  **Short Description:** `Custom API for the sideband notification channel application`
 
-- Click on **+ New Backend** and fill out the MBE creation form as follows:
-  - **Name**: `CreditUnion`
-  - **Description** (optional): `MBE for Credit Union Application(s)`
-  - **Analytics**:
-    - **Application**: `New`
-    - **Application Name**: `CreditUnion`
-    - **Time Zone**: `Whatever floats your boat`
+  ![](images/300/300-3.png)
+
+  ![](images/300/300-4.png)
+
+- In the **Default Media Type** dropdown, select **application/json**.
+
+  ![](images/300/300-5.png)
+
+## Create Resource Endpoints
+
+### **Step 3**: Create Endpoint for Loans Resource
+
+- Click **Endpoints** from the Custom API page navbar and then click the **+ New Resource** button.
+
+  ![](images/300/300-6.png)
+
+- Fill out the resource information as follows:
+
+  **Resource Path:** `loans`
+
+  **Display Name:** `Loans`
+
+  **Resource Description:** `Loan notification profiles`
+
+  ![](images/300/300-7.png)
+
+### **Step 4**: Create Endpoint for Loan Nested Resource
+
+- To add a nested resource with route parameters, click the **+** sign ![](images/300/300-7-plus.png) and fill out the nested resource information as follows:
+
+  **Resource Path:** `{loanId}`
+
+  **Display Name:** `Loan`
+
+  **Resource Description:** `Loan notification profile`
+
+  ![](images/300/300-8.png)
+
+### **Step 5**: Create Endpoint for Dealers Resource
+
+- Click **+ New Resource** again and fill out the resource information as follows:
+
+  **Resource Path:** `dealers`
+
+  **Display Name:** `Dealers`
+
+  **Resource Description:** `Automobile dealership contacts`
+
+  ![](images/300/300-9.png)
+
+### **Step 6**: Create Endpoint for Dealer Nested Resource
+
+- Click the **+** sign ![](images/300/300-7-plus.png) and fill out the nested resource information as follows:
+
+  **Resource Path:** `{dealerId}`
+
+  **Display Name:** `Dealer`
+
+  **Resource Description:** `Automobile dealership contact`
+
+  ![](images/300/300-10.png)
+
+## Add HTTP Request Methods to Loans Resource Endpoints
+
+### **Step 7**: Add GET Method to Loans Resource Endpoint
+
+- Click **Methods** next to the Loans resource to navigate to the resource methods page and then click the **GET** option from the **+ Add Method** dropdown.
+
+  ![](images/300/300-11.png)
+
+- Fill out the request description as follows:
+
+  **Description:** `Get all loan notification profiles`
+
+  **Display Name:** `Loans`
+
+  ![](images/300/300-12.png)
+
+### **Step 8**: Add POST Method to Loans Resource Endpoint
+
+- Click the **POST** option from the **+ Add Method** dropdown and fill out the request descripton as follows.
+
+  **Description:** `Create new loan notification profile`
+
+  **Display Name:** `Loan`
+
+  ![](images/300/300-13.png)
+
+- Beneath the endpoint description, click the **Request** tab, click the **Add Media Type** button, and select **application/json** from the **Media Type** dropdown.
+
+  ![request body](images/300/300-13-requestBody.png)
+
+- Click the **Endpoints** breadcrumb to navigate back to the resource endpoints page.
+
+  ![breadcrumb](images/300/300-13-endpoints.png)
+
+### **Step 9**: Add GET Method to Loan Nested Resource Endpoint
+
+- Click **Methods** next to the Loan nested resource and fill out the nested resource information as follows:
+
+  **Required:** `True (checked)`
+
+  **Parameter Description:** `Unique ID of loan object`
+
+  **Example:** `<'loan1.json' ID>`
+
+  ![](images/300/300-14.png)
+
+- Click the **GET** option from the **+ Add Method** dropdown and fill out the request information as follows:
+
+  **Description:** `Get a loan notification profile`
+
+  **Display Name:** `Loan`
+
+  ![](images/300/300-15.png)
+
+### **Step 10**: Add PUT Method to Loan Nested Resource Endpoint
+
+- Click the **PUT** option from the **+ Add Method** dropdown and fill out the request descripton as follows.
+
+  **Description:** `Update a loan notification profile`
+
+  **Display Name:** `Loan`
+
+  ![](images/300/300-16.png)
+
+- Add **application/json** to the request body **Media Types**, as done in step 8.
+
+### **Step 11**: Add DELETE Method to Loan Nested Resource Endpoint
+
+- Click the **DELETE** option from the **+ Add Method** dropdown and fill out the request descripton as follows.
+
+  **Description:** `Delete a loan notification profile`
+
+  **Display Name:** `Loan`
+
+  ![](images/300/300-17.png)
+
+- Click the **Endpoints** breadcrumb to navigate back to the resource endpoints page.
+
+  ![breadcrumb](images/300/300-13-endpoints.png)
+
+## Add HTTP Request Methods to Dealers Resource Endpoints
+
+### **Step 12**: Add GET Method to Dealers Resource Endpoint
+
+- Click **Methods** next to the Dealers resource to navigate to the resource methods page and then click the **GET** option from the **+ Add Method** dropdown.
+
+  ![](images/300/300-11.png)
+
+- Fill out the request description as follows:
+
+  **Description:** `Get all dealer objects`
+
+  **Display Name:** `Dealers`
+
+  ![](images/300/300-18.png)
+
+### **Step 13**: Add POST Method to Dealers Resource Endpoint
+
+- Click the **POST** option from the **+ Add Method** dropdown and fill out the request descripton as follows.
+
+  **Description:** `Create a dealer object`
+
+  **Display Name:** `Dealer`
+
+  ![](images/300/300-19.png)
+
+- Add **application/json** to the request body **Media Types**, as done in step 8.
+
+- Click the **Endpoints** breadcrumb to navigate back to the resource endpoints page.
+
+  ![breadcrumb](images/300/300-13-endpoints.png)
+
+### **Step 14**: Add GET Method to Dealer Nested Resource Endpoint
+
+- Click **Methods** next to the Loan nested resource and fill out the nested resource information as follows:
+
+  **Required:** `True (checked)`
+
+  **Parameter Description:** `Unique ID of dealer object`
+
+  **Example:** `<'dealer1.json' ID>`
+
+  ![](images/300/300-20.png)
+
+- Click the **GET** option from the **+ Add Method** dropdown and fill out the request information as follows:
+
+  **Description:** `Get a dealer object`
+
+  **Display Name:** `Dealer`
+
+  ![](images/300/300-21.png)
+
+### **Step 15**: Add PUT Method to Dealer Nested Resource Endpoint
+
+- Click the **PUT** option from the **+ Add Method** dropdown and fill out the request descripton as follows.
+
+  **Description:** `Update a dealer object`
+
+  **Display Name:** `Dealer`
+
+  ![](images/300/300-22.png)
+
+- Add **application/json** to the request body **Media Types**, as done in step 8.
+
+### **Step 16**: Add DELETE Method Endpoint to Dealer Nested Resource
+
+- Click the **DELETE** option from the **+ Add Method** dropdown and fill out the request descripton as follows.
+
+  **Description:** `Delete a dealer object`
+
+  **Display Name:** `Dealer`
+
+  ![](images/300/300-23.png)
+
+- Click the **Endpoints** breadcrumb to navigate back to the resource endpoints page.
+
+  ![breadcrumb](images/300/300-13-endpoints.png)
+
+- Click **Save** in the top right-hand corner of the page.
+
+### **Step 17**: Set API Access
+
+The last thing we'll do before actually implementing our API is to set the security configuration so that (a) only the roles we defined in **LabGuide100** can access our API in general and (b) access to each endpoint is restricted to only the roles that need access.
+
+- Click **Security** from the API page navbar, toggle the **Login Required** button, and add **LoanProcessor** and **Dealer** to **Roles** under **API Access**
+
+  ![](images/300/300-24.png)
+
+### **Step 18**: Set Endpoint Access
+
+- Under **Endpoint Access** set the **Endpoint** & **Roles** as follows:
+  - `GET Loans` - **LoanProcessor**, **Dealer**
+  - `POST Loans` - **LoanProcessor**
+  - `GET Loan` - **LoanProcessor**, **Dealer**
+  - `PUT Loan` - **LoanProcessor**, **Dealer**
+  - `DELETE Loan` - **LoanProcessor**
+  - `GET Dealers` - **LoanProcessor**, **Dealer**
+  - `POST Dealers` - **LoanProcessor**
+  - `GET Dealer` - **LoanProcessor**, **Dealer**
+  - `PUT Dealer` - **LoanProcessor**, **Dealer**
+  - `DELETE Dealer` - **LoanProcessor**
+
+  ![](images/300/300-25.png)
+
+- Click **Save** once again in the top right-hand corner of the page.
+
+# Implement Custom API
+
+## Download API Implementation Archive
+
+### **Step 19**: Download API Implementation Archive
+
+Now that we have created the necessary endpoints for our resources, we have to add the actual implementation code for each. Fortunately for us, the **API Platform** of AMCe provides a downloadable **JavaScript scaffold** of our current API design.
+
+- Click **Implementation** from the API page navbar and click the **JavaScript Scaffold** button to download your archive.
+
+  ![](images/300/300-26.png)
+
+### **Step 20**: Configure Initial Implementation Archive
+
+- Unzip the scaffold and check its contents. The directory should contain the following files:
+  - `package.json` - the module manifest
+  - `<api name>.js` - your starter implementation
+  - `<api name>.raml` - the API definition in RAML format
+  - `swagger.json` - the API definition in Swagger format
+  - `toolsConfig.json` - contains metadata needed by the tools, such as backend environment and authorization info, the API, and AMCe endpoint and test definitions
+  - `samples.txt`
+  - `README.md`
+
+- In the `toolsConfig.json` file, for each of the `backend` keys, provide the values corresponding to your **AMCe MBE** information we took note of earlier.
+
+  ![](images/300/300-27.png)
+
+- For the two client keys in `tools.authorization`, provide the values found in the **Instance Details** of our **AMCe** environment.
+
+  ![](images/300/300-28.png)
+
+## Add API Implementation Code
+
+### **Step 21**: Copy/Paste API Implementation Code
+
+If we open up our `<api name>.js`, we see that all the work has already been done to set up the REST server, separate the logic in an appropriate manner, install the AMCe SDK, and define the endpoint methods. All we have to do now is fill in the blanks.
+
+- Instead of actually writing out the implementations for each endpoint, we will save time by just copying/pasting code found in `api/api.js` of the workshop code directory we downloaded in the `UserGuide` pre-lab.
+
+- Because we are using a custom `node_module` in our code, we need to install it before we can deploy our implementation. In your terminal, at the root directory of your API implementation, type the following command: 
   
-  ![](images/100/100-8.png)
+  `npm install --save uniqid`
 
-- After your new MBE has been successfully created, you will be redirected to your MBE page.
+### **Step 22**: Deploy API Implementation
 
-  ![](images/100/100-9.png)
+- Still in the root directory of your API implementation, type the following command to package and deploy your implementation: 
+  
+  `omce-deploy toolsConfig.json -u <AMCe username> -p <AMCE password>`
 
-### **STEP 4**: Explore Mobile Backend Page
+  ![](images/300/300-29.png)
 
-Most of creation and configuring of our backend microservices will be done through this main backend page so as to automatically associate them with the parent backend. Otherwise, if we created any standalone microservice, we would have to manually associate it with our backend in order to use it. 
+- Now, if we go to the **Implementation** section of our **API** page we will see our deployed archive as the API's current, active implementation.
 
-- On the left side of the page is a navigation menu with most of the previously mentioned microservices as well as **Diagnostics**, MBE **Settings**, **Security**, **Notifications**, and **App Policies**. 
+  ![](images/300/300-30.png)
 
-  ![](images/100/100-10.png)
+## Test API Implementation
 
-- We will go more in depth into several of these features/services in later labs but, for now, let us take a look at our MBE **Settings**. Here we have several important pieces of information unique to our backend. In particular, we want to make a note of the **Backend ID** under **Access Keys** as we will be needing it in following labs.
+### **Step 24**: Test Loans Endpoint(s)
 
-    ![](images/100/100-11.png)
+Now that we have successfully deployed an implementation for our custom **API**, the last thing we want to do is actually test it. We will only test 1-2 endpoints for each resource to (a) demonstrate the **API Platform**'s testing feature and (b) ensure that we have proper access to our resources. That said, you are free to test each endpoint to thoroughly accurate implementation.
 
-# Configure AMCe Environment
+- To navigate to the **API** test page, click the **Test** button in the top right corner of your **API** page.
 
-## Create User Roles
+  ![](images/300/300-31.png)
 
-### **STEP 5**: Create Admin Role
+- Click the yellow **Default Test Credentials** button and set the default credentials form as follows and then click the **checkmark** to save your settings:
 
-Before we actually begin working on our new MBE, we first need to configure our AMCe environment to provide the necessary access for the different types users of our MBE. We won't go into much detail here but the two things we will do are (1) create **Roles** for our MBE users and (2) edit our environment **Policies** to allow anonymous access to our shared storage collections.
+  **Backend:** `CreditUnion`
 
-First we will create the **Admin** role for any users of our AMCe environment.
+  **Authentication Method:** `OAuth Consumer`
 
-- Click on **Roles** in the main navigation menu
+  **Username:** `<AMCe username>`
 
-    ![](images/100/100-12.png)
+  **Password:** `<AMCe password>`
 
-- Click on **+ New Role** and fill out the creation form as follows:
+- We will first test the **Loans** resource, starting with the **GET Loans** request. Click **GET Loans** and then click the **Test Endpoint** button. If successful, you should see a **Test Response Status:** 200 message and the response headers followed by the response JSON, which should be a list of loan objects.
 
-    **Role Name:** `Admin`
-
-    **Description:** `Admin who is either an AMCe developer or a loan processor of a credit union.`
-
-    ![](images/100/100-14.png)
-
-### **STEP 6**: Create Dealer Role
-
-Next, we will create the **Dealer** role for the auto dealership contacts which will be the users of our Credit Union mobile applciation.
-
-- Click on **+ New Role** again and fill out the creation form as follows:
-
-    **Role Name:** `Dealer`
-
-    **Description:** `Dealership contact who communicates with the loan processor of a credit union.`
-
-    ![](images/100/100-15.png)
-
-## Set Environment Policies
-
-### **STEP 7**: Export Current Policies File
-
-In the next lab we will be creating the object storage collections the data that is to be visualized in our mobile application. To allow anonymous access to this shared collection we will add this setting to our environment policies file.
-
-- Click the **Settings** dropdown in the main navigation menu and followed by **Policies**.
-
-    ![](images/100/100-16.png)
-
-- Click the **Export** button to download the current policies file
-
-    ![](images/100/100-17.png)
-
-### **STEP 8**: Add Anonymous Access Policy
-
-- Using a text editor, open the policies file you just downloaded and, anywhere in the file, add a new line with the following policy:
-
-`*.*.Security_CollectionsAnonymousAccess=Loans(1.0)`
-
-- Save the file and, back in your AMCe environment, upload the updated policies file by either clicking **Import a policies file** or by dragging the file into the page. Doing so successfully will display the following:
-
-    ![](images/100/100-18.png)
-
-## Download Project Code
-
-### **STEP 9**: Download Project Code
-
-The last step in setting up our environment before beginning the actual work on our project is to download the project code repository. The repository is not complete which will allow us to fill in the missing pieces but what it does do is give us the proper template to organize the phases of our project.
-
-- In your terminal, in the directory you want the root of your project to reside, paste the following:
-
-`https://github.com/ndc466/amce-notifications-workshop`
-
-  ![](images/100/100-19.png)
-
-- Type `cd acme-notifications-workshop` and then `ls` and you should see the following project structure:
-
+  ![](images/300/300-32.png)
 
 - You are now ready to move to the next lab.

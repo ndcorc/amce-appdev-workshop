@@ -1,19 +1,19 @@
 # Trial Account User Guide
 
-![](images/userguide/Picture-Title.png)
+![](images/000/title.png)
 Updated: April 17, 2018
 
 ## Workshop Introduction
 
-This Oracle Public Cloud **AMCe with Push Notifications workshop** will walk you through the Software Development Lifecycle (SDLC) for a native mobile application built using Oracle's **Autonomous Mobile Cloud Enterprise (AMCe)**, including **Push Notifications** as well as several other key microservices provided by the platform. 
+This is the Oracle Public Cloud **AMCe Application Development workshop** which will walk you through the Software Development Lifecycle (SDLC) for a dual-channel application (web + mobile) built using Oracle's **Autonomous Mobile Cloud Enterprise** (AMCe) as a complete backend solution.
 
-During the workshop you will be building a "sideband" notification channel between an "admin" web application and a "client" native mobile application. This will be accomplished in 3 main phases. In phase 1,you will create the initial mobile application and, in doing so, set up the AMCe project which we will use as our complete backend solution. Then, in phase 2, we will complete the initial implementation of our mobile app by taking the last steps needed to enable our mobile device to recieve push notifications sent from our AMCe environment. Finally, in the bonus lab, we will deploy an "admin" web application which we will use to send push notifications to our mobile device instead of AMCe.
+During this workshop you will be building a "sideband" notification channel as a solution for a hypothetical credit union. This channel will facilitate communication regarding loan application profiles between a credit union's loan processor ("admin" web app) and a contact at an automobile dealership ("client" mobile app). First, you will create the initial AMCe mobile backend project which we will be used by both our mobile and web applications. You'll then actually create the two applications and implement the backend microservices they rely upon. These will include custom APIs, object storage, user registration/authentication, client/app registration, device registration, and push notifications.
 
-Completing this workshop will provide in depth exposure to Oracle **Autonomous Mobile Cloud Enterprise (AMCe)** and Oracle **Application Container Cloud Service (ACCS)**, two powerful cloud enterprise for building enterprise grade applications. Lastly, during the course of this workshop you gain valuable experience using popular open-source technologies together with proprietary tools to develop full-stack applications.
+By completing the different components of this workshop, you will get in depth exposure to Oracle **Autonomous Mobile Cloud Enterprise** (AMCe), including its integrated, backend cloud services. Additionally, by creating the "admin" app, you will gain experience using Oracle **Application Container Cloud Service** to deploy web applications. Lastly, throughout the development process of this workshop, you will gain valuable experience using a combination of popular open-source technologies together with proprietary tools to develop enterprise-grade, full-stack applications.
 
 - You can see a list of Lab Guides by clicking on the **Menu Icon**
 
-    ![](images/WorkshopMenu.png)
+  ![workshop-menu](images/workshop-menu.png)
 
 - To log issues and view the Lab Guide source, go to the [github oracle](https://github.com/oracle/learning-library/issues/new) repository.
 
@@ -30,13 +30,13 @@ Completing this workshop will provide in depth exposure to Oracle **Autonomous M
 - Click on this URL [cloud.oracle.com/tryit](http://cloud.oracle.com/tryit&intcmp=DeveloperInnovation-HOL-11NOV17), and complete all the required steps to get your free Oracle Cloud Trial Account.
 - You must wait to receive our account before continuing to the "**Configure Oracle Cloud Identity Information**" Section.
 
-## _Configure Oracle Cloud Identity Information_
+## _Configure Oracle Cloud Platform Environment_
 
 ### **Step 2**: Record information from the welcome email and login
 
 - During the provisioning of your account, you will receive two welcome email message. ***Note: You must wait for the 2nd email shown below***, as this email signals that your account is fully provisioned. If the second email does not appear within 30 minutes, please check your Junk or Promotions email folders (based on your email provider).
 
-![](images/userguide/Picture199.1.png)
+![](images/000/0-1.png)
 
 - For later use during the workshop labs, **record the following fields**, some of which you'll find in the email. This information will be ***used multiple times*** during the workshops Labs, so we recommend that you **copy the following list to a text document**, and then populate the fields as they are collected from the **Welcome Email** documented above.
 
@@ -57,73 +57,126 @@ Cloud Account Password:
 ### **Step 3**: Log into your Cloud Account
 
 - Click on the link ***(4)*** **Get Started with Oracle Cloud** link provided in the email.
+
 - Follow the instructions to **set your password**, and then record in your notes the new password for this **Cloud Account Password** field.
 
 - You are now have viewing the dashboard used to access all the Cloud Services managed by the Oracle Identity Cloud Services.
 
 - Click on the **Customize Dashboard** box to add the some select services to the Dashboard.
 
-    ![](images/userguide/Picture200.2.png)
+  ![Customize Dashboard](images/000/000-2.png)
 
-- Click on **Show** for the **Application Container**, **Developer**, **Identity Cloud**, **Compute Classic** and **Storage Classic** services. Then click the **X** in the top right corner to close the dialog.
+- Click on **Show** for the **Application Container** and **Autonomous Mobile Enterprise** services. Then click the **X** in the top right corner to close the dialog.
 
-    ![](images/userguide/Picture200.3.png)
-
-    ![](images/userguide/Picture200.3.1.png)
-
-    ![](images/userguide/Picture200.3.2.png)
+  ![Dashboard Options](images/000/000-3.png)
 
 
+### **Step 4**: Create Autonomous Mobile Cloud Enterprise Instance
 
-### **Step 4**: Check/Set Storage Replication Policy
+Now that we have the dashboard we want, let's go ahead and create our **AMCe** instance using the **QuickStart** instance creation engine.
 
-Some services that we will use in this workshop require that your account's Replication Policy is set. The following steps will show you how to set your replication policy.
+- Click on **Create Instance** on the main dashboard page.
 
-- Click on the **Hamburger Menu** in the upper left corner of the browser window to expose the **Dashboard Menu**, then click on the **Storage Classic** menu option.
+  ![Create Instance](images/000/000-4.png)
 
-    ![](images/userguide/Picture201.png)
+- Under **Autonomous Mobile Enterprise**, click the **Create** button.
 
-- If your replication policy has not yet been set, the following dialog will be displayed. Use the Default **Georeplication Policy**, and click on **Set Policy**.
+  ![Service Options](images/000/000-5.png)
 
-    ![](images/userguide/Picture202.png)
+- For **Instance Name**, either keep the auto-generated name or input your own instance name and then click **Create**.
 
-- To return to the main **Dashboard**, click on the **Hamburger Menu**, and then click on the **My Services** menu option.
+  ![Creation Form](images/000/000-6.png)
 
-    ![](images/userguide/Picture204.png)
+### **Step 5**: Access AMCe Instance
 
+- On the main dashboard, click **Autonomous Mobile Enterprise** and then click **Open Service Console** in the top right corner of the page. Here we see our successfully created **AMCe** instance.
 
-## Install Git
+  ![AMCe Service Console](images/000/000-7.png)
 
-### **Step 5**: Download/Install Git
+- **Click** the hamburger menu icon to the right of our instance, **right** click **Go to Instance Home**, select **Copy Link Location**, and lastly save this copied URL for later.
 
-- Go to the following URL: https://git-scm.com/downloads
+  ![Copy Home URL](images/000/000-8.png)
 
-    ![](images/userguide/Picture8.png)
+## Install Application Software
 
-- Select your OS. In our example, we will show how to install on Windows. Click **Windows** Download and click **Save File**
+### **Step 6**: Download/Install Xcode
 
-    ![](images/userguide/Picture9.png)
+- Open the Mac **App Store** app and search for `Xcode`. Under the `Xcode` app, click **GET** to begin installing the application.
 
-- Select your download location and click **Save**. We will use D:\Software    
+  ![xcode](images/000/xcode.png)
 
-    ![](images/userguide/Picture10.png)
+### **Step 7**: Download/Install Postman
 
-- Open Windows Explorer and navigate to where you downloaded the Git executable. Double click on the Git executable to start the install process.
+- In a browser, go to the [downloads page](https://www.getpostman.com/apps) of the Postman website and click **Download** under your operating system. Unzip the application file and move it to your `Applications` directory.
 
-    ![](images/userguide/Picture11.png)
+## Install CLI Tools/Software
 
-- Run through the installation process. In our tests, we used the default installation settings.
+### **Step 8**: Install XCode Command Line Tools
 
-    ![](images/userguide/Picture12.png)
+- First, check if the full Xcode package is already installed. In your terminal, enter the following shell command:
 
-## Get Started on Lab 100
+  `xcode-select -p`
 
-### **Step 6**: Load Lab 100
+  If you see:
 
-- Cick on the dropdown menu in the top left corner of the screen.
+  `/Applications/Xcode.app/Contents/Developer`
 
-    ![](images/userguide/Picture219.png)
+  the full Xcode package is already installed and you can move on to the next step.
 
-- Select **Lab 100** to continue to your next section of this workshop.
+- If you do not have the package already installed, enter the command:
 
-    ![](images/userguide/Picture220.png)
+  `xcode-select --install`
+
+### **Step 9**: Install Homebrew
+
+Homebrew is a software package management system that simplifies the installation of software on the `macOS` operating system. We will be using it to install key development tools that we'll need for this workshop.
+
+- In your terminal, enter the following command:
+
+  `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+
+### **Step 10**: Install Git, Node, and Watchman
+
+- In your terminal, enter the following command:
+
+  `brew install git node watchman`
+
+### **Step 11**: Install React Native CLI + Create React App
+
+- In your terminal, enter the following command:
+
+  `npm install -g react-native-cli && npm install -g create-react-app`
+
+### **Step 12**: Download/Install AMCe CLI Tools
+
+Oracle **Autonomous Mobile Cloud Enterprise** (AMCe) provides a set of custom code test tools which we will use in the following labs to test, debug, package, and deploy our custom API implementations from the command line.
+
+- On the [AMCe Downloads page](http://www.oracle.com/technetwork/topics/cloud/downloads/amce-downloads-4478270.html), click the **Accept License Agreement** radio button and then download the `amce-tools-v1x.x.x.x` file at the bottom of the page under the **Tools** section.
+
+  ![amce-downloads](images/000/amce-downloads.png)
+
+- On your machine, open a terminal window, and change directories to the `omce-tools` directory that you just installed and run the command: `npm install -g`
+
+- To ensure the tools were installed correctly, run `omce-test --version`. It should return a version number of the form `1x.x.x`.
+
+### **Step 13**: Download Workshop Code
+
+- To download the code we will be using in this workshop, we need to clone the code repository. In your terminal, find an appropriate directory for your project and enter the following command:
+
+  `git clone https://github.com/ndc466/amce-appdev-workshop-code.git`
+
+- Type `cd amce-appdev-workshop-code` and then `ls` and you should see the following project structure:
+
+```
+README.md
+admin/ - code for the admin web application
+api/ - implementation code for the AMCe Custom API
+client/ - code for the client mobile application
+env/ - environment data and configuration files
+```
+
+### **Step 14**: Acquire Apple IDs + Certificates
+
+- In the following labs, you will require the Oracle Team App ID and the associated APNS Certificate. Once you have that `.cer` file, use `Keychain Access` to export this certificate file to a `.p12` file.
+
+- You are now ready to move to the next lab.
