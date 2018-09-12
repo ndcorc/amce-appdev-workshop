@@ -57,7 +57,7 @@ In order to create our custom API microservice and have it automatically be asso
 
   **API Display Name:** `Sideband Notifications API`
 
-  **API Name:** `SidebandNotificationsAPI`
+  **API Name:** `SidebandNotificationsAPI_<AMCE_USERNAME>`
 
   **Short Description:** `Custom API for the sideband notification channel application`
 

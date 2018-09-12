@@ -38,11 +38,11 @@ create-react-app admin
 
 Now that we have the **React** boilerplate project generated, let's add the directory which contains our project code and then edit the project configuration files to actually implement the code.
 
-- In the project repository previously cloned in the pre-workshop `UserGuide`, copy the `src` directory and paste it into the root directory of your React project.
+- In the project repository previously cloned in the pre-workshop `UserGuide`, replace the `src` directory with the one found in the root directory of your React project.
 
   ![Implementation Directory](images/500/500-1.png)
 
-- In the same directory of the workshop code repository, copy each of the 3 files in the `admin` directory and paste them into the root directory of your React project.
+- In the `env/` directory of the workshop code, copy/paste the `config.js` file (that we edited in previous labs) and the 2 files found in the `admin/` directory into the root directory of your React project (replace `package.json`).
 
   ![Configuration](images/500/500-2.png)
 
