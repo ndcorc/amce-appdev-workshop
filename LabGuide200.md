@@ -110,7 +110,7 @@ In order to create our object storage microservice and have it automatically be 
 
   ![](images/200/200-10.png)
 
-- Click **Default Test Credentials**, select **OAuth Consumer** for the Authentication Method, fill in your **Username** + **Password**, and click the checkmark to save your settings.
+- Click **Default Test Credentials**, select **OAuth Consumer** for the Authentication Method, fill in your AMCe **username** + **password**, and click the checkmark to save your settings.
 
   ![](images/200/200-11.png)
 

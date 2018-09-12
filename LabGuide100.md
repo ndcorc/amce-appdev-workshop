@@ -63,7 +63,7 @@ In this workshop you will take on several different roles as the key developer o
 
 - Click on **+ New Backend** and fill out the **MBE** creation form as follows:
 
-  **Name**: `CreditUnion`
+  **Name**: `CreditUnion_<AMCE_USERNAME>`
 
   **Description**: `MBE for Credit Union Application(s)`
 
@@ -123,7 +123,7 @@ In order to secure our backend, we must restrict access to resources based on th
 
 - Click on **+ New Role** and fill out the creation form as follows:
 
-  **Role Name:** `LoanProcessor`
+  **Role Name:** `LoanProcessor_<AMCE_USERNAME>`
 
   **Description:** `A credit union's loan processor who communicates with the contact at an automobile dealership`
 
@@ -135,7 +135,7 @@ Next, we will create the **Dealer** role for the auto dealership contacts which 
 
 - Click on **+ New Role** again and fill out the creation form as follows:
 
-  **Role Name:** `Dealer`
+  **Role Name:** `Dealer_<AMCE_USERNAME>`
 
   **Description:** `Dealership contact who communicates with the loan processor of a credit union`
 
@@ -157,7 +157,7 @@ Next, we will create the **Dealer** role for the auto dealership contacts which 
 
 - Click the **+ Add** button at the top, leave the `User can request access` box unchecked, and fill out the **Group** creation form as follows and then click **Next**:
 
-  **Name:** `LoanProcessors`
+  **Name:** `LoanProcessors_<AMCE_USERNAME>`
 
   **Description:** `Credit union loan processors who communicate with the contact at an automobile dealership`
 
@@ -171,7 +171,7 @@ Next, we will create the **Dealer** role for the auto dealership contacts which 
 
 - Click **Groups** in the side navigation bar once more to teturn to the main **Groups** page. Click the **+ Add** button at the top, leave the `User can request access` box unchecked, and fill out the **Group** creation form as follows and then click **Next**:
 
-  **Name:** `Dealers`
+  **Name:** `Dealers_<AMCE_USERNAME>`
 
   **Description:** `Dealership contacts who communicate with the loan processor of a credit union`
 
