@@ -175,7 +175,7 @@ client/ - code for the client mobile application
 env/ - environment data and configuration files
 ```
 
-### **Step 14**: Acquire Apple IDs + Certificates
+### **Step 14**: Acquire Apple IDs + Certificates (ignore)
 
 - In the following labs, you will need the Oracle Team App ID and the associated APNS Certificate. Once you have that `.cer` file, use `Keychain Access` to export this certificate file to a `.p12` file.
 
