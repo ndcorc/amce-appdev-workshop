@@ -35,7 +35,7 @@ In this workshop you will take on several different roles as the key developer o
 
 - From any browser, go to the URL of your AMCe environment.
 
-- If you are not already logged in, you will be redirected to the IDCS login page. There, enter your User Name and Password and click **Sign In**.:
+- If you are not already logged in, you will be redirected to the IDCS login page. There, enter your User Name and Password and click **Sign In**:
 
   ![IDCS Login Page](images/100/100-1.png)
 
@@ -55,7 +55,7 @@ In this workshop you will take on several different roles as the key developer o
 
 ### **STEP 3**: Create New Mobile Backend (MBE)
 
-**AMCe** was built around the concept of mobile backends, which enable you to develop and deploy different microservices in an integrated fashion by associating them with the same backend. Thus, the **Backends** feature is our starting point and, as we go, we will create several of the available backend microservices such as Custom **APIs**, Client Apps & **Notification Profiles**, Object **Storage**, and Mobile Users & **Roles**.
+**AMCe** was built around the concept of mobile backends, which enable you to develop and deploy different microservices in an integrated fashion by associating them with the same backend. Thus, the **Backends** feature is our starting point and, as we go, we will create several of the available backend microservices such as Custom **APIs**, Client Apps + **Notification Profiles**, Object **Storage**, and Mobile Users + **Roles**.
 
 - Click on **Backends** to take you to a list of Mobile Backends (**MBEs**).
 
@@ -79,13 +79,15 @@ Most of creation and configuring of our backend microservices will be done throu
 
   ![](images/100/100-7.png)
 
-- We will go more in depth into several of these features/services in later labs but, for now, let us take a look at our MBE **Settings**. Here we have several important pieces of information unique to our backend. In particular, were going to want to copy/paste the following **Access Keys** and **Environment URLs** in a seperate file as we will be needing them going forward:
+- We will go more in depth into several of these features/services in later labs but, for now, let us take a look at our MBE **Settings**. Here we have several important pieces of information unique to our backend that we want to save in the `config.js` found in the `env/` directory of our workshop code (cloned in the pre-lab). In particular, copy/paste the following **Access Keys** and **Environment URLs**:
   - `Client ID`
   - `Client Secret`
   - `Backend ID`
   - `Anonymous Key`
   - `Base URL`
   - `OAuth Token Endpoint`
+
+- While you are already editing to the `config.js` file, in the `auth` field of the JSON object, replace `<AMCE_USER>` and `<AMCE_PW>` with your AMCe username and password. Finally, replace `IDCS_HOST_URL` with the same `OAuth Token Endpoint` value only remove the trailing `/oauth2/v1/token` endpoint.
 
 # Configure AMCe Environment
 
@@ -221,7 +223,7 @@ Lastly, in our **IDCS** console, we want to edit our own user information and ad
 
 ### **STEP 15**: Set Environment Parameters in Postman
 
-The last step we need to take to enable developer access to the **IDCS** REST API is to acquire an OAuth access token, determine your unique **IDCS User ID** and the unique **IDCS Group IDs** of the two groups we just created, and save all of this information to our configuration file. To simplify this, we will use a preconfigured Postman IDCS environment to make the requests needed to generate these values.
+The last step we need to take to enable developer access to the **IDCS REST API** is to acquire an OAuth access token, determine your unique **IDCS User ID** and the unique **IDCS Group IDs** of the two groups we just created, and, lastly, save all of this information to our `config.js` file. To simplify this, we will use a preconfigured Postman IDCS environment to make the requests needed to generate these values.
 
 - Follow step 2 of the instructions found [here](http://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/idcs/idcs_rest_postman_obe/rest_postman.html#SettheEnvironmentParametersinPostman)
 
@@ -231,14 +233,15 @@ The last step we need to take to enable developer access to the **IDCS** REST AP
 
 ### **STEP 17**: Acquire an OAuth Access Token
 
-- Follow step 4 of the [instructions](http://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/idcs/idcs_rest_postman_obe/rest_postman.html#RequestanAccessToken). Copy the access token generated and, in your `config.js` file, paste the value to the `accessToken` variable.
+- Follow step 4 of the [instructions](http://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/idcs/idcs_rest_postman_obe/rest_postman.html#RequestanAccessToken). Copy the access token generated and, in `auth` section of your `config.js` file, replace `<IDCS_OAUTH_ACCESS_TOKEN>` with the copied value.
 
 ### **STEP 18**: Acquire your IDCS User ID
 
-- Follow step 6 of the [instructions](http://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/idcs/idcs_rest_postman_obe/rest_postman.html#TestOtherUserAPICalls) except instead of the `Create a user` POST request, make the `List all users` request found in the `Users/Search/` folder of your Postman requests collection. In the response body, find the user associated with yourself and copy/paste the **id** value to the `userId` variable in your `config.js` file.
+- Follow step 6 of the [instructions](http://www.oracle.com/webfolder/technetwork/tutorials/obe/cloud/idcs/idcs_rest_postman_obe/rest_postman.html#TestOtherUserAPICalls) except instead of the `Create a user` POST request, make the `List all users` request found in the `Users/Search/` folder of your Postman requests collection. In the response body, find the user associated with yourself and copy/paste the **id** value in place of `<IDCS_USER_ID>` in `auth` section of your `config.js` file.
 
 ### **STEP 19**: Acquire IDCS Group IDs
 
-- Follow the same process of adding the unique IDCS **ID** values to the corresponding variables in your `config.js` for each group we created in **step 9** and **step 10**. To list all the group objects, use the `List all groups` GET request found in the `Groups/Search/` folder of your Postman requests collection.
+- Follow the same process of adding the unique **IDCS ID** values to the corresponding variables in your `config.js` for each group we created in **step 9** and **step 10**. 
+  To list all the group objects, use the `List all groups` GET request found in the `Groups/Search/` folder of your Postman requests collection. In the response, find each of the groups we created in **step 9** and **step 10** and copy the corresponding `id` values. Then, in the `auth.groupIds` section of our `config.js` file, and replace the key/value pairs with each group's respective group name and group id.
 
 - You are now ready to move to the next lab.

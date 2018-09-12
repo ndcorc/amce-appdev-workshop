@@ -115,42 +115,7 @@ with
   }
 ```
 
-- We also need to create a new `config.js` file to store the access keys and URLs of our **AMCe Mobile Backend and API** created in `LabGuide300`. In the project's root, create a file called `config.js` and paste the following code:
-
-```javascript
-const config = {
-  baseUrl: '<MBE_Base_URL>',
-  idcsUrl: '<IDCS_Base_URL>',
-  backendName: '<BACKEND_NAME>',
-  basicAuth: {
-    backendId: "<BACKEND_ID>",
-    anonymousKey: "<ANONYMOUS_KEY>"
-  },
-  oAuth: {
-    username: "<AMCE_USERNAME>",
-    password: "<AMCE_PW>",
-    clientId: "<CLIENT_ID>",
-    clientSecret: "<CLIENT_SECRET>",
-    tokenEndpoint: "<OAUTH_TOKEN_ENDPOINT>",
-  },
-  auth: {
-    userId: "<IDCS_USER_ID>",
-    groupIds: {
-      LoanProcessors: "<IDCS_GROUP_ID>",
-      Dealers: "<IDCS_GROUP_ID>"
-    },
-    accessToken: "<AUTH_ACCESS_TOKEN>"
-  }
-}
-
-export default config;
-```
-
-- Copy/paste the key/value pairs corresponding to the values we saved in **step 4** of `LabGuide100`.
-
-- For `idcsUrl`, paste the `oAuthTokenEndpoint` URL but without the trailing `/oauth2/v1/token` endpoint.
-
-- For the `auth` key/value pairs, paste the values we acquired in **steps 16, 17, and 18** of `LabGuide100`.
+- Lastly, in order for our project to reference the access keys and URLs of our **AMCe Mobile Backend**, we need to copy/paste the `config.js` file that we edited in `LabGuide100` into our project's root directory.
 
 ## Build Working Application
 

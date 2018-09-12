@@ -177,6 +177,6 @@ env/ - environment data and configuration files
 
 ### **Step 14**: Acquire Apple IDs + Certificates
 
-- In the following labs, you will require the Oracle Team App ID and the associated APNS Certificate. Once you have that `.cer` file, use `Keychain Access` to export this certificate file to a `.p12` file.
+- In the following labs, you will need the Oracle Team App ID and the associated APNS Certificate. Once you have that `.cer` file, use `Keychain Access` to export this certificate file to a `.p12` file.
 
 - You are now ready to move to the next lab.
