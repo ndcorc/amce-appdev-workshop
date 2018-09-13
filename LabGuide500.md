@@ -42,13 +42,21 @@ Now that we have the **React** boilerplate project generated, let's add the dire
 
   ![Implementation Directory](images/500/500-1.png)
 
-- In the `env/` directory of the workshop code, copy/paste the `config.js` file (that we edited in previous labs) and the 2 files found in the `admin/` directory into the root directory of your React project (replace `package.json`).
+- In the `env/` directory of the workshop code, copy/paste the `config.js` file (that we edited in previous labs) into the `src` directory of your projet code.
 
   ![Configuration](images/500/500-2.png)
+
+- In the `env/admin/` directory of the workshop code, copy/paste the 2 files found here into the root directory of your React project (replacing `package.json`).
 
 ### **STEP 3**: Install Dependencies
 
 - Now that you have the proper `package.json` in the root of your project, type the following command in your terminal (in the root of your project): `npm install`
+
+  **IMPORTANT NOTE:** Before testing your web application locally, you will need to make the following code changes to match the specific naming conventions of your project.
+
+  1. In `src/services/AMCe.js`, change all instances of `SidebandNotificationsAPI` to `SidebandNotificationsAPI_<AMCE_USER>` within the `endpoints` object.
+  2. Still in `src/services/AMCe.js`, change `config.auth.groupIds.LoanProcessors` to `config.auth.groupIds.LoanProcessors_<AMCE_USER>` on line 130.
+  3. In `src/redux/actions/loanListActions.js`, change `'Loans'` to `'Loans_<AMCE_USER>'` in line 20.
 
 ## Test Application Locally
 

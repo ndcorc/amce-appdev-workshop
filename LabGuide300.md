@@ -55,9 +55,9 @@ In order to create our custom API microservice and have it automatically be asso
 
 - Fill out the API creation form as follows and then click **Create** to take you to your Custom API page:
 
-  **API Display Name:** `Sideband Notifications API`
+  **API Display Name:** `SidebandNotificationsAPI_<AMCE_USER>`
 
-  **API Name:** `SidebandNotificationsAPI_<AMCE_USERNAME>`
+  **API Name:** `SidebandNotificationsAPI_<AMCE_USER>`
 
   **Short Description:** `Custom API for the sideband notification channel application`
 
@@ -346,15 +346,22 @@ Now that we have created the necessary endpoints for our resources, we have to a
 
 If we open up our `<api name>.js`, we see that all the work has already been done to set up the REST server, separate the logic in an appropriate manner, install the AMCe SDK, and define the endpoint methods. All we have to do now is fill in the blanks.
 
-- Instead of actually writing out the implementations for each endpoint, we will save time by just copying/pasting code found in `api/api.js` of the workshop code directory we downloaded in the `UserGuide` pre-lab.
+- Instead of actually writing out the implementations for each endpoint, we will save time by just copying/pasting code found in `api/sidebandnotificationsapi.js` of the workshop code directory we downloaded in the `UserGuide` pre-lab. 
 
-- Because we are using a custom `node_module` in our code, we need to install it before we can deploy our implementation. In your terminal, at the root directory of your API implementation, type the following command: 
+  **IMPORTANT NOTE:** You will need to go back through the API implementation code you just copy/pasted and make 3 key changes:
   
-  `npm install --save uniqid`
+  1. Change each endpoint definition to match the proper name of your API (e.g. change `/mobile/custom/SidebandNotificationsAPI` to
+  `/mobile/custom/SidebandNotificationsAPI_<AMCE_USER>`)
+  2. Change every reference to `'Loans'` to `'Loans_<AMCE_USER>'`
+  3. Change every reference to `'Dealers'` to `'Dealers_<AMCE_USER>'`
+
+- Because we are using a custom `node_module` in our code, we need to install it before we can deploy our implementation. In your terminal, at the root directory of your API implementation, type the following command:
+  
+  `npm install --save uuid`
 
 ### **Step 22**: Deploy API Implementation
 
-- Still in the root directory of your API implementation, type the following command to package and deploy your implementation: 
+- Still in the root directory of your API implementation, type the following command to package and deploy your implementation:
   
   `omce-deploy toolsConfig.json -u <AMCe username> -p <AMCE password>`
 
