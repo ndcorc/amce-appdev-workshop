@@ -48,7 +48,7 @@ In order to create our object storage microservice and have it automatically be 
 
 - Click **+ New Collection** and fill out the creation form as follows:
 
-  **Collection Name:** `Loans`
+  **Collection Name:** `Loans_<AMCE_USER>`
 
   **Collection Type:** `Shared`
 
@@ -84,7 +84,7 @@ In order to create our object storage microservice and have it automatically be 
 
 - Click **+ New Collection** and fill out the creation form as follows and then click **Create**:
 
-  **Collection Name:** `Dealers`
+  **Collection Name:** `Dealers_<AMCE_USER>`
 
   **Collection Type:** `Shared`
 
