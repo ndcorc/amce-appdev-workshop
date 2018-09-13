@@ -163,7 +163,8 @@ Now that we've added the application's implementation and edited/added the confi
 
   1. In `app/components/AMCe.js`, change all instances of `SidebandNotificationsAPI` to `SidebandNotificationsAPI_<AMCE_USER>` within the `endpoints` object.
   2. Still in `app/components/AMCe.js`, change `config.auth.groupIds.Dealers` to `config.auth.groupIds.Dealers_<AMCE_USER>` on line 156.
-  3. In `app/redux/actions/loanListActions.js`, change `'Loans'` to `'Loans_<AMCE_USER>'` on line 50.
+  3. Still in `app/components/AMCe.js`, change `com.creditunion.client.app` to the **Bundle Identifier** you used in your **Xcode** project.
+  4. In `app/redux/actions/loanListActions.js`, change `'Loans'` to `'Loans_<AMCE_USER>'` on line 50.
 
 ### **STEP 8**: Manually Link PushNotificationsIOS and ART Libraries
 
@@ -263,7 +264,7 @@ Now that we have our iOS client application succesfully built, we want to offici
 
   **Mobile App Version:** `1.0`
 
-  **Bundle ID:** `<"Oracle Team" APNS App ID>`
+  **Bundle ID:** `<Bundle Identifier in Xcode Project>`
 
   **Description:** `App Client for Dealer Mobile Application`
 
