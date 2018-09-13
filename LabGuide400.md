@@ -135,6 +135,12 @@ Now that we've added the application's implementation and edited/added the confi
   react-native link
   ```
 
+  **IMPORTANT NOTE:** Before moving on, you will need to make the following code changes to match the specific naming conventions of your project.
+
+  1. In `app/components/AMCe.js`, change all instances of `SidebandNotificationsAPI` to `SidebandNotificationsAPI_<AMCE_USER>` within the `endpoints` object.
+  2. Still in `app/components/AMCe.js`, change `config.auth.groupIds.Dealers` to `config.auth.groupIds.Dealers_<AMCE_USER>` on line 156.
+  3. In `app/redux/actions/loanListActions.js`, change `'Loans'` to `'Loans_<AMCE_USER>'` on line 50.
+
 ### **STEP 8**: Manually Link PushNotificationsIOS and ART Libraries
 
 We now have linked all of the **React Native** libraries except for the `PushNotificationsIOS` and `ART` libraries, which must be manually linked. To do so we will have to actually go into our Xcode project and edit the configuration settings/files to properly include the library.
