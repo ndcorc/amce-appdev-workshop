@@ -33,7 +33,31 @@ In the previous 3 labs, we created & configured an AMCe environment & Mobile Bac
 react-native init client
 ```
 
-### **STEP 2**: Configure Xcode Project Settings
+### **STEP 2**: Configure Xcode Project Settings (specialization training)
+
+- Confirm that you have recieved the following three files:
+  - `ent3_inhouse_2019.p12`
+  - `OCS_NAS_Demo5.mobileprovision`
+  - `Oracle_Ent3.mobileprovision`
+
+- Open up the **Xcode** project by double-clicking the `client/ios/client.xcodeproj` file.
+
+- In the main project file, click the `client` **Target** and then click the **General** tab.
+  - Under the **Signing** section, unclick **Automatically manage signing** (if it is checked)
+  - Under the **Signing (Debug)** section, click the **Provisioning Profile** dropdown, click **Import Profile...**, and upload the `OCS_NAS_Demo5.mobileprovision` file.
+  - Exit out of **Xcode** completely
+  - Double click the `ent3_inhouse_2019.p12` file to add it to your **Keychain** (no password)
+  - Re-open your **Xcode** project, select **Build Settings**, click the **Code Signing Identity** dropdown, and select **iPhone Distribution: Oracle Corporation (Ent 3)** (beneath *Identities in Keychain*)
+  - Do the same for **Debug** and **Release** (if not done automatically)
+  - Back in the **General** tab, change the **Bundle Identifier** to `com.oraclecorp.internal.ent3.ocsnas.demo5`
+
+- Under **Deployment Info->Devices**, select `Universal`.
+
+- Next, select the **Capabilities** tab, and, next to **Push Notifications**, toggle the option to **ON**.
+
+- Lastly, delete completely the `clientTests`, `client-tvOS`, and `client-tvOSTests` targets.
+
+### (DEPRECATED) **STEP 2**: Configure Xcode Project Settings
 
 - Open up the **Xcode** project by double-clicking the `client/ios/client.xcodeproj` file.
 
