@@ -256,9 +256,9 @@ Now that we have our iOS client application succesfully built, we want to offici
 
 - In the main **MBE** page, click the **Clients** section in the side navbar, click the **+ New Client** button, and fill out the new client creation form as follows:
 
-  **Client Display Name:** `DealerApp`
+  **Client Display Name:** `DealerApp_<AMCE_USER>`
 
-  **Client Name:** `DealerApp`
+  **Client Name:** `DealerApp_<AMCE_USER>`
 
   **Platform:** `iOS`
 
@@ -274,7 +274,7 @@ Now that we have our iOS client application succesfully built, we want to offici
 
 - Click the **Profiles** tab, click the **+ New Profile** button, and fill out the creation form as follows:
 
-  **Name:** `DealerAppProfile`
+  **Name:** `DealerAppProfile_<AMCE_USER>`
 
   **Notification Service:** `Apple Push Notification Service (APNS)`
 
@@ -282,7 +282,7 @@ Now that we have our iOS client application succesfully built, we want to offici
 
 - For the **Certificate Type** and **Password Protected** fields, enter the details which correspond to the "Oracle Team" APNS Certificate.
 
-- Lastly, upload your **P12** certificate and click the **Create** button
+- Lastly, upload the `ent3_ocsnas_demo5.p12` certificate and click the **Create** button
 
 ## Test Push Notifications
 
